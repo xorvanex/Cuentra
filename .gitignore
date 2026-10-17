@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+/.ruff_cache/
+
+# Frontend
+node_modules/
+.next/
+out/
+coverage/
+pnpm-debug.log
+.pnpm-store/
+frontend/.env.local
+
+# Local configuration and data
+.env
+*.db
+*.sqlite3
+data/local/
+**/runtime_state.json
+**/test_state.json
+**/*.tmp
+*.tsbuildinfo
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

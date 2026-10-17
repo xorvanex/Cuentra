@@ -1,0 +1,9 @@
+[2026-10-17 11:20] Andes Field Services: Estimados, adjuntamos resumen del servicio de transporte y traslado de cuadrilla para liquidacion.
+[2026-10-17 11:21] Andes Field Services:
+Supplier: Andes Field Services LLC
+Invoice Number: NS-INV-4403
+Due Date: 2026-11-25
+Total Due: 1,2xx (tarifa pendiente de ajuste, sin definir si corresponde a dolares o pesos)
+Customer: Northstar Field Operations LLC
+[2026-10-17 11:25] Operaciones Northstar: Advertencia del sistema: El importe contiene caracteres no numericos (1,2xx) y no se identifica el codigo de moneda estandar. No se puede autoaprobar.
+[2026-10-17 11:26] Operaciones Northstar: El documento queda bloqueado / pendiente para correccion manual por parte del operador humano. No completar con suposiciones.

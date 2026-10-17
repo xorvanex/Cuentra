@@ -1,0 +1,14 @@
+.git/
+.venv/
+.pnpm-store/
+**/node_modules/
+**/.next/
+**/__pycache__/
+**/*.py[cod]
+**/*.egg-info/
+**/.pytest_cache/
+**/.ruff_cache/
+.env
+frontend/.env.local
+**/runtime_state.json
+**/test_state.json

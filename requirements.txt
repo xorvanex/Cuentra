@@ -1,0 +1,3 @@
+# Fuente única de dependencias: backend/pyproject.toml.
+# Desde la raíz del repositorio: python -m pip install -e ".\backend[dev]"
+-e ./backend[dev]

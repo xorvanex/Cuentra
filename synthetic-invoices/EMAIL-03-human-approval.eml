@@ -1,0 +1,35 @@
+Subject: Invoice NS-INV-4303 - Andes Field Services LLC
+From: operations@andesfieldservices.example.test
+To: ap@northstaroperations.example.test
+Date: Mon, 19 Oct 2026 09:45:00 -0500
+Message-ID: <inv-4303@andesfieldservices.example.test>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Estimado equipo de Administracion y Operaciones, Northstar Field Operations L=
+LC:
+
+Presentamos la factura correspondiente a los trabajos de infraestructura y ma=
+ntenimiento de campo:
+
+Supplier: Andes Field Services LLC
+Invoice Number: NS-INV-4303
+Issue Date: 2026-10-19
+Due Date: 2026-12-05
+Currency: USD
+Total Due: USD 6,250.00
+Customer: Northstar Field Operations LLC
+
+Descripcion:
+Intervencion especializada en estaciones de bombeo, cambio de valvulas de alt=
+a presion y mantenimiento preventivo integral en zona de campamento.
+
+Dado que el importe supera el umbral de aprobacion automatica de USD 5,000.00=
+, entendemos que requerira revision y aprobacion por parte de la direccion co=
+rrespondiente.
+
+Saludos cordiales,
+Administracion de Contratos
+Andes Field Services LLC
+operations@andesfieldservices.example.test

@@ -1,0 +1,23 @@
+[
+  {
+    "external_reference": "DEMO-APPROVE-001",
+    "vendor_name": "Soluciones Andinas",
+    "amount": "250000.00",
+    "currency": "COP",
+    "due_date": "2026-10-30"
+  },
+  {
+    "external_reference": "DEMO-BLOCK-001",
+    "vendor_name": "Proveedor No Autorizado",
+    "amount": "320000.00",
+    "currency": "COP",
+    "due_date": "2026-10-28"
+  },
+  {
+    "external_reference": "DEMO-ESCALATE-001",
+    "vendor_name": "Logística Demo",
+    "amount": "2200000.00",
+    "currency": "COP",
+    "due_date": "2026-11-05"
+  }
+]

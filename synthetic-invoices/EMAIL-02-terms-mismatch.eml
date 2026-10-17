@@ -1,0 +1,38 @@
+Subject:
+ Invoice NS-INV-4302 for Purchase Order NS-PO-902 - Pacific Ledger Support LLC
+From: billing@pacificledgersupport.example.test
+To: ap@northstaroperations.example.test
+Date: Fri, 16 Oct 2026 11:15:00 -0500
+Message-ID: <inv-4302-po902@pacificledgersupport.example.test>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Estimado equipo de Finanzas de Northstar Field Operations LLC,
+
+Emitimos la factura correspondiente a los servicios acordados bajo la orden d=
+e compra indicada:
+
+Supplier: Pacific Ledger Support LLC
+Invoice Number: NS-INV-4302
+Purchase Order: NS-PO-902
+Issue Date: 2026-10-16
+Due Date: 2026-11-25
+Currency: USD
+Total Due: USD 4,800.00
+Customer: Northstar Field Operations LLC
+
+Detalle:
+Servicios especializados de soporte contable y conciliacion multi-entidad baj=
+o orden NS-PO-902.
+Nota: El importe facturado en esta emision es de USD 4,800.00. La politica co=
+rporativa define de forma independiente para esa combinacion un valor acordad=
+o de USD 4,200.00, por lo que el sistema debe validar y bloquear por discrepa=
+ncia de importe pactado.
+
+Quedamos a su disposicion para cualquier consulta.
+
+Cordialmente,
+Cuentas por Cobrar
+Pacific Ledger Support LLC
+billing@pacificledgersupport.example.test

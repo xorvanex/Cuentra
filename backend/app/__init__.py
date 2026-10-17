@@ -1,0 +1,1 @@
+"""Backend de Blinka Guard."""

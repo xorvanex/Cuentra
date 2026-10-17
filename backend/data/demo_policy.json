@@ -1,0 +1,15 @@
+{
+  "name": "Política de demostración Hackatón 30X",
+  "currency": "COP",
+  "allowed_vendors": [
+    "soluciones andinas",
+    "papelería central",
+    "logística demo"
+  ],
+  "max_invoice_amount": "5000000.00",
+  "period_budget": "6000000.00",
+  "human_approval_threshold": "1500000.00",
+  "approver_ids": [
+    "demo-approver"
+  ]
+}

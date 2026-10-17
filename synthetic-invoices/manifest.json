@@ -1,0 +1,195 @@
+[
+  {
+    "id": "PDF-01",
+    "filename": "PDF-01-valid-auto-approve.pdf",
+    "media_type": "application/pdf",
+    "scenario": "Caso normal de operacion; proveedor permitido Andes Field Services LLC con importe USD 1,250.00 por debajo del umbral de aprobacion humana ($5,000) y dentro del presupuesto del periodo.",
+    "expected_outcome": "APPROVE",
+    "expected_reason_codes": [
+      "POLICY_CHECKS_PASSED"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4101",
+    "amount": "1250.00",
+    "currency": "USD",
+    "due_date": "2026-11-15",
+    "agreement_reference": null
+  },
+  {
+    "id": "PDF-02",
+    "filename": "PDF-02-duplicate-invoice.pdf",
+    "media_type": "application/pdf",
+    "scenario": "Caso trampa de duplicado; repite exactamente el proveedor Andes Field Services LLC y la referencia NS-INV-4101 de PDF-01.",
+    "expected_outcome": "BLOCK",
+    "expected_reason_codes": [
+      "DUPLICATE_INVOICE"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4101",
+    "amount": "1250.00",
+    "currency": "USD",
+    "due_date": "2026-11-15",
+    "agreement_reference": null
+  },
+  {
+    "id": "PDF-03",
+    "filename": "PDF-03-human-approval.pdf",
+    "media_type": "application/pdf",
+    "scenario": "Proveedor permitido Río Claro Creative Studio SAS por USD 7,800.00 dentro del maximo permitido ($20,000) pero igual o superior al umbral de aprobacion humana ($5,000).",
+    "expected_outcome": "ESCALATE",
+    "expected_reason_codes": [
+      "HUMAN_APPROVAL_REQUIRED"
+    ],
+    "vendor": "Río Claro Creative Studio SAS",
+    "reference": "NS-INV-4103",
+    "amount": "7800.00",
+    "currency": "USD",
+    "due_date": "2026-11-28",
+    "agreement_reference": null
+  },
+  {
+    "id": "IMG-01",
+    "filename": "IMG-01-unapproved-vendor.png",
+    "media_type": "image/png",
+    "scenario": "Factura por USD 980.00 emitida por Selva Norte Consulting SAS, proveedor no incluido en la lista de proveedores permitidos de la politica base.",
+    "expected_outcome": "BLOCK",
+    "expected_reason_codes": [
+      "VENDOR_NOT_ALLOWED"
+    ],
+    "vendor": "Selva Norte Consulting SAS",
+    "reference": "NS-INV-4201",
+    "amount": "980.00",
+    "currency": "USD",
+    "due_date": "2026-11-18",
+    "agreement_reference": null
+  },
+  {
+    "id": "IMG-02",
+    "filename": "IMG-02-invoice-limit.png",
+    "media_type": "image/png",
+    "scenario": "Factura de Pacific Ledger Support LLC por USD 22,450.00 que excede el limite maximo permitido por factura ($20,000.00).",
+    "expected_outcome": "BLOCK",
+    "expected_reason_codes": [
+      "INVOICE_LIMIT_EXCEEDED"
+    ],
+    "vendor": "Pacific Ledger Support LLC",
+    "reference": "NS-INV-4202",
+    "amount": "22450.00",
+    "currency": "USD",
+    "due_date": "2026-12-02",
+    "agreement_reference": null
+  },
+  {
+    "id": "IMG-03",
+    "filename": "IMG-03-budget-exceeded.png",
+    "media_type": "image/png",
+    "scenario": "Factura de Andes Field Services LLC por USD 12,000.00. Aunque individualmente esta dentro del maximo de $20,000, al evaluarse despues de aprobar PDF-01 ($1,250), EMAIL-01 ($2,400) y CHAT-01 ($850) (total acumulado $4,500), su aprobacion requeriria $16,500 superando el presupuesto del periodo de $15,000.00.",
+    "expected_outcome": "BLOCK",
+    "expected_reason_codes": [
+      "PERIOD_BUDGET_EXCEEDED"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4203",
+    "amount": "12000.00",
+    "currency": "USD",
+    "due_date": "2026-11-30",
+    "agreement_reference": null
+  },
+  {
+    "id": "EMAIL-01",
+    "filename": "EMAIL-01-valid-auto-approve.eml",
+    "media_type": "message/rfc822",
+    "scenario": "Correo electronico de Río Claro Creative Studio SAS por USD 2,400.00. Caso regular, proveedor permitido y presupuesto disponible; aprobacion automatica.",
+    "expected_outcome": "APPROVE",
+    "expected_reason_codes": [
+      "POLICY_CHECKS_PASSED"
+    ],
+    "vendor": "Río Claro Creative Studio SAS",
+    "reference": "NS-INV-4301",
+    "amount": "2400.00",
+    "currency": "USD",
+    "due_date": "2026-11-20",
+    "agreement_reference": null
+  },
+  {
+    "id": "EMAIL-02",
+    "filename": "EMAIL-02-terms-mismatch.eml",
+    "media_type": "message/rfc822",
+    "scenario": "Correo de Pacific Ledger Support LLC por USD 4,800.00 citando la orden de compra NS-PO-902. La politica corporativa define de forma independiente para esa orden un valor acordado de USD 4,200.00. Debe bloquearse por discrepancia de importe pactado.",
+    "expected_outcome": "BLOCK",
+    "expected_reason_codes": [
+      "AGREEMENT_AMOUNT_MISMATCH"
+    ],
+    "vendor": "Pacific Ledger Support LLC",
+    "reference": "NS-INV-4302",
+    "amount": "4800.00",
+    "currency": "USD",
+    "due_date": "2026-11-25",
+    "agreement_reference": "NS-PO-902"
+  },
+  {
+    "id": "EMAIL-03",
+    "filename": "EMAIL-03-human-approval.eml",
+    "media_type": "message/rfc822",
+    "scenario": "Correo de Andes Field Services LLC por USD 6,250.00. Proveedor permitido y dentro del limite maximo, pero supera el umbral humano de USD 5,000.00.",
+    "expected_outcome": "ESCALATE",
+    "expected_reason_codes": [
+      "HUMAN_APPROVAL_REQUIRED"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4303",
+    "amount": "6250.00",
+    "currency": "USD",
+    "due_date": "2026-12-05",
+    "agreement_reference": null
+  },
+  {
+    "id": "CHAT-01",
+    "filename": "CHAT-01-valid-auto-approve.txt",
+    "media_type": "text/plain",
+    "scenario": "Mensaje estructurado de chat de Andes Field Services LLC por USD 850.00. Caso regular para aprobación automática dentro de las reglas generales de política.",
+    "expected_outcome": "APPROVE",
+    "expected_reason_codes": [
+      "POLICY_CHECKS_PASSED"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4401",
+    "amount": "850.00",
+    "currency": "USD",
+    "due_date": "2026-11-22",
+    "agreement_reference": null
+  },
+  {
+    "id": "CHAT-02",
+    "filename": "CHAT-02-human-approval.txt",
+    "media_type": "text/plain",
+    "scenario": "Mensaje estructurado de chat de Río Claro Creative Studio SAS por USD 5,400.00. Supera el umbral de aprobacion humana de USD 5,000.00; debe escalar.",
+    "expected_outcome": "ESCALATE",
+    "expected_reason_codes": [
+      "HUMAN_APPROVAL_REQUIRED"
+    ],
+    "vendor": "Río Claro Creative Studio SAS",
+    "reference": "NS-INV-4402",
+    "amount": "5400.00",
+    "currency": "USD",
+    "due_date": "2026-12-08",
+    "agreement_reference": null
+  },
+  {
+    "id": "CHAT-03",
+    "filename": "CHAT-03-ambiguous-data.txt",
+    "media_type": "text/plain",
+    "scenario": "Mensaje de chat con referencia NS-INV-4403 y fecha 2026-11-25 legibles, pero importe ('1,2xx') y moneda deliberadamente ambiguos y no concluyentes. Caso de extraccion incierta; debe marcarse con campos faltantes y requerir intervencion humana sin autoaprobar jamas.",
+    "expected_outcome": null,
+    "expected_reason_codes": [
+      "EXTRACTION_UNCERTAIN_DATA",
+      "MANUAL_REVIEW_REQUIRED"
+    ],
+    "vendor": "Andes Field Services LLC",
+    "reference": "NS-INV-4403",
+    "amount": null,
+    "currency": null,
+    "due_date": "2026-11-25",
+    "agreement_reference": null
+  }
+]

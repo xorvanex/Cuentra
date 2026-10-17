@@ -1,0 +1,9 @@
+[2026-10-16 09:30] Soporte Andes Field Services: Buenos dias equipo de Northstar Field Operations LLC. Compartimos el detalle de los servicios de soporte contable auxiliar de la semana.
+[2026-10-16 09:31] Soporte Andes Field Services:
+Supplier: Andes Field Services LLC
+Invoice Number: NS-INV-4401
+Due Date: 2026-11-22
+Total Due: USD 850.00
+Customer: Northstar Field Operations LLC
+[2026-10-16 09:33] Operaciones Northstar: Muchas gracias. Verifico que el proveedor, referencia NS-INV-4401 y total USD 850.00 son correctos.
+[2026-10-16 09:34] Finanzas Northstar: Ingresando al pipeline de procesamiento automatizado para aprobacion.

@@ -1,0 +1,37 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      APP_ENV: development
+      APP_NAME: Blinka Guard API
+      API_PREFIX: /api/v1
+      CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
+      TESSERACT_LANG: eng+spa
+      BLINKA_DATA_FILE: /app/backend/data/runtime_state.json
+      BLINKA_ALLOW_LOCAL_TEST_NON_LOOPBACK: "true"
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - blinka-data:/app/backend/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8000/api/v1
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3000:3000"
+
+volumes:
+  blinka-data:

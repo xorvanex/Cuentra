@@ -1,0 +1,33 @@
+Subject: Invoice NS-INV-4301 - =?utf-8?q?R=C3=ADo?= Claro Creative Studio SAS
+From: billing@rioclarostudio.example.test
+To: ap@northstaroperations.example.test
+Date: Thu, 15 Oct 2026 14:30:00 -0500
+Message-ID: <inv-4301@rioclarostudio.example.test>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Estimado equipo de Cuentas por Pagar de Northstar Field Operations LLC,
+
+Adjuntamos los datos formales de la factura por los servicios prestados duran=
+te el periodo:
+
+Supplier: R=C3=ADo Claro Creative Studio SAS
+Invoice Number: NS-INV-4301
+Issue Date: 2026-10-15
+Due Date: 2026-11-20
+Currency: USD
+Total Due: USD 2,400.00
+Customer: Northstar Field Operations LLC
+
+Concepto:
+Servicios de consultoria visual, material digital para capacitacion de seguri=
+dad de campo y manuales de procedimiento operativo.
+
+Por favor proceder con la validacion y pago correspondiente segun nuestros te=
+rminos comerciales habituales.
+
+Atentamente,
+Departamento de Facturacion
+R=C3=ADo Claro Creative Studio SAS
+billing@rioclarostudio.example.test

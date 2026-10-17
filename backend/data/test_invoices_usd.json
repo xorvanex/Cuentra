@@ -1,0 +1,23 @@
+[
+  {
+    "external_reference": "TEST-USD-APPROVE-001",
+    "vendor_name": "Andes Field Services LLC",
+    "amount": "1250.00",
+    "currency": "USD",
+    "due_date": "2026-11-15"
+  },
+  {
+    "external_reference": "TEST-USD-BLOCK-001",
+    "vendor_name": "Selva Norte Consulting SAS",
+    "amount": "980.00",
+    "currency": "USD",
+    "due_date": "2026-11-18"
+  },
+  {
+    "external_reference": "TEST-USD-ESCALATE-001",
+    "vendor_name": "Río Claro Creative Studio SAS",
+    "amount": "7800.00",
+    "currency": "USD",
+    "due_date": "2026-11-28"
+  }
+]

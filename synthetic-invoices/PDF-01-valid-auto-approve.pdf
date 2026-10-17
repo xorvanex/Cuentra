@@ -1,0 +1,109 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792]
+/Resources <<
+  /Font <<
+    /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+    /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+  >>
+>>
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<< /Length 1506 >>
+stream
+BT
+0.10 0.20 0.40 rg
+/F2 20 Tf
+1 0 0 1 50 730 Tm
+(INVOICE / FACTURA) Tj
+0.20 0.20 0.20 rg
+/F2 13 Tf
+1 0 0 1 50 705 Tm
+(Andes Field Services LLC) Tj
+0.40 0.40 0.40 rg
+/F1 10 Tf
+1 0 0 1 50 690 Tm
+(Contractor Services & Field Infrastructure) Tj
+0.10 0.10 0.10 rg
+/F2 11 Tf
+1 0 0 1 50 650 Tm
+(Supplier: Andes Field Services LLC) Tj
+0.10 0.10 0.10 rg
+/F2 11 Tf
+1 0 0 1 50 630 Tm
+(Invoice Number: NS-INV-4101) Tj
+0.20 0.20 0.20 rg
+/F1 10 Tf
+1 0 0 1 50 610 Tm
+(Issue Date: 2026-10-15) Tj
+0.10 0.10 0.10 rg
+/F2 11 Tf
+1 0 0 1 50 590 Tm
+(Due Date: 2026-11-15) Tj
+0.10 0.10 0.10 rg
+/F2 11 Tf
+1 0 0 1 320 650 Tm
+(Customer: Northstar Field Operations LLC) Tj
+0.30 0.30 0.30 rg
+/F1 10 Tf
+1 0 0 1 320 630 Tm
+(Attn: Accounts Payable) Tj
+0.20 0.20 0.20 rg
+/F1 10 Tf
+1 0 0 1 320 610 Tm
+(Currency: USD) Tj
+0.30 0.30 0.30 rg
+/F1 10 Tf
+1 0 0 1 320 590 Tm
+(Payment Terms: Net 30) Tj
+0.10 0.20 0.40 rg
+/F2 11 Tf
+1 0 0 1 50 530 Tm
+(Description of Services) Tj
+0.20 0.20 0.20 rg
+/F1 10 Tf
+1 0 0 1 50 505 Tm
+(1. Routine regional field technical maintenance) Tj
+0.20 0.20 0.20 rg
+/F1 10 Tf
+1 0 0 1 50 485 Tm
+(2. Pipeline sensor diagnostics and calibration support) Tj
+0.20 0.20 0.20 rg
+/F1 11 Tf
+1 0 0 1 50 430 Tm
+(Subtotal: USD 1,250.00) Tj
+0.40 0.40 0.40 rg
+/F1 10 Tf
+1 0 0 1 50 410 Tm
+(Taxes / VAT: USD 0.00 \(Cross-border contractor exempt\)) Tj
+0.10 0.20 0.40 rg
+/F2 14 Tf
+1 0 0 1 50 380 Tm
+(Total Due: USD 1,250.00) Tj
+0.50 0.50 0.50 rg
+/F1 9 Tf
+1 0 0 1 50 340 Tm
+(Payment Instructions: Synthetic demo settlement via ACH) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000366 00000 n 
+trailer
+<< /Size 5 /Root 1 0 R >>
+startxref
+1924
+%%EOF
