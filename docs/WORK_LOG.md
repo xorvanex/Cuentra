@@ -1,5 +1,13 @@
 # Registro de trabajo compartido
 
+## 2026-10-18 — Aislamiento de datos Operativos por navegador
+
+- Se corrigió la explicación del despliegue: antes el backend público guardaba todos los datos Operativos en un mismo `runtime_state.json` de Railway, por lo que visitantes podían compartir el estado. Esa descripción debió aclararse antes.
+- El frontend genera y conserva un UUID por perfil del navegador y lo envía como `X-Cuentra-Client-ID`; el backend separa facturas, políticas, decisiones, aprobaciones y auditoría en `backend/data/clients/<uuid>.json`.
+- En `APP_ENV=production`, las rutas de la API requieren ese identificador, salvo health y raíz. El espacio local de pruebas conserva su JSON independiente y sus restricciones existentes.
+- Los datos siguen procesándose y almacenándose en Railway. El UUID separa espacios para la demo, pero no es autenticación; usar solo datos sintéticos. El antiguo `runtime_state.json` no se migra ni se elimina.
+- Se documentó en los README el alcance del aislamiento y qué sucede al borrar almacenamiento del sitio o usar otro perfil.
+
 ## 2026-10-18 — Recorrido guiado del espacio de pruebas
 
 - Al entrar a **Pruebas locales** en localhost, la UI cambia al espacio aislado y conserva la selección al navegar por Facturas, Aprobaciones y Auditoría.

@@ -357,14 +357,31 @@ _test_store = LocalJsonStore(
     Path(__file__).resolve().parents[2] / "data" / "test_state.json"
 )
 _active_store: ContextVar[LocalJsonStore] = ContextVar("cuentra_active_store", default=_default_store)
+_client_stores: dict[str, LocalJsonStore] = {}
+_client_stores_lock = RLock()
 
 
-def select_store(workspace: str) -> tuple[LocalJsonStore, Token[LocalJsonStore] | None]:
-    """Selecciona persistencia por petición; los datos locales de prueba nunca comparten JSON."""
+def select_store(
+    workspace: str, client_id: str | None = None
+) -> tuple[LocalJsonStore, Token[LocalJsonStore] | None]:
+    """Selecciona persistencia por petición, aislando Operativos por perfil de navegador."""
     if workspace == "test":
         return _test_store, _active_store.set(_test_store)
     if workspace == "main":
-        return _default_store, _active_store.set(_default_store)
+        if not client_id:
+            return _default_store, _active_store.set(_default_store)
+        try:
+            canonical_id = str(UUID(client_id))
+        except ValueError as exc:
+            raise ValueError("Identificador de navegador inválido") from exc
+        with _client_stores_lock:
+            client_store = _client_stores.get(canonical_id)
+            if client_store is None:
+                client_store = LocalJsonStore(
+                    _default_store.path.parent / "clients" / f"{canonical_id}.json"
+                )
+                _client_stores[canonical_id] = client_store
+        return client_store, _active_store.set(client_store)
     raise ValueError("Espacio de trabajo desconocido")
 
 

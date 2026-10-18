@@ -78,6 +78,7 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 .topbar-right { gap: 18px; }
 .workspace-select-label { display: inline-flex; align-items: center; gap: 6px; color: #7c898c; font-size: 9px; }
 .workspace-select-label select { height: 29px; padding: 0 8px; border: 1px solid var(--line); border-radius: 5px; color: #40585d; background: #fff; font-size: 10px; }
+.workspace-select-label .browser-data-note { color: #638078; font-size: 9px; white-space: nowrap; }
 .api-label { display: inline-flex; align-items: center; gap: 7px; color: #526d62; font-size: 10px; }
 .api-label i { width: 7px; height: 7px; border-radius: 50%; background: #56b97c; box-shadow: 0 0 0 3px #56b97c20; }
 .api-label-offline { color: #a15b42; }

@@ -101,7 +101,7 @@ export type InvoiceCreate = Pick<
 
 export type ApiError = Error & { status?: number };
 
-async function request<T>(workspace: Workspace, path: string, init?: RequestInit): Promise<T> {
+async function request<T>(workspace: Workspace, clientId: string | undefined, path: string, init?: RequestInit): Promise<T> {
   let response: Response;
   try {
     response = await fetch(`${API_BASE_URL}${path}`, {
@@ -109,6 +109,7 @@ async function request<T>(workspace: Workspace, path: string, init?: RequestInit
       headers: {
         Accept: "application/json",
         ...(workspace === "test" ? { "X-Cuentra-Workspace": "test" } : {}),
+        ...(clientId ? { "X-Cuentra-Client-ID": clientId } : {}),
         ...(init?.body && !(init.body instanceof FormData) ? { "Content-Type": "application/json" } : {}),
         ...init?.headers,
       },
@@ -135,21 +136,21 @@ async function request<T>(workspace: Workspace, path: string, init?: RequestInit
   return body as T;
 }
 
-export function createApi(workspace: Workspace = "main") {
+export function createApi(workspace: Workspace = "main", clientId?: string) {
   return {
-  health: () => request<{ status: string }>(workspace, "/health"),
+  health: () => request<{ status: string }>(workspace, clientId, "/health"),
   invoices: {
-    list: () => request<Invoice[]>(workspace, "/invoices"),
+    list: () => request<Invoice[]>(workspace, clientId, "/invoices"),
     create: (payload: InvoiceCreate) =>
-      request<Invoice>(workspace, "/invoices", {
+      request<Invoice>(workspace, clientId, "/invoices", {
         method: "POST",
         body: JSON.stringify(payload),
       }),
     decisions: (invoiceId: string) =>
-      request<Decision[]>(workspace, `/invoices/${invoiceId}/decisions`),
+      request<Decision[]>(workspace, clientId, `/invoices/${invoiceId}/decisions`),
     evaluate: (invoiceId: string, policyId: string) =>
       request<Decision>(
-        workspace,
+        workspace, clientId,
         `/invoices/${invoiceId}/evaluate?policy_id=${encodeURIComponent(policyId)}`,
         { method: "POST" },
       ),
@@ -158,33 +159,33 @@ export function createApi(workspace: Workspace = "main") {
     extract: async (file: File, channel: "auto" | "email" | "chat" = "auto") => {
       const body = new FormData();
       body.set("file", file);
-      return request<DocumentExtraction>(workspace, `/documents/extract?channel=${channel}`, {
+      return request<DocumentExtraction>(workspace, clientId, `/documents/extract?channel=${channel}`, {
         method: "POST",
         body,
       });
     },
   },
   policies: {
-    list: () => request<Policy[]>(workspace, "/policies"),
-    create: (payload: PolicyCreate) => request<Policy>(workspace, "/policies", { method: "POST", body: JSON.stringify(payload) }),
-    update: (policyId: string, payload: PolicyCreate) => request<Policy>(workspace, `/policies/${policyId}`, { method: "PUT", body: JSON.stringify(payload) }),
-    delete: (policyId: string) => request<void>(workspace, `/policies/${policyId}`, { method: "DELETE" }),
+    list: () => request<Policy[]>(workspace, clientId, "/policies"),
+    create: (payload: PolicyCreate) => request<Policy>(workspace, clientId, "/policies", { method: "POST", body: JSON.stringify(payload) }),
+    update: (policyId: string, payload: PolicyCreate) => request<Policy>(workspace, clientId, `/policies/${policyId}`, { method: "PUT", body: JSON.stringify(payload) }),
+    delete: (policyId: string) => request<void>(workspace, clientId, `/policies/${policyId}`, { method: "DELETE" }),
   },
   approvals: {
-    list: () => request<Approval[]>(workspace, "/approvals?pending_only=false"),
+    list: () => request<Approval[]>(workspace, clientId, "/approvals?pending_only=false"),
     resolve: (approvalId: string, outcome: FinalOutcome, reason: string) =>
-      request<Approval>(workspace, `/approvals/${approvalId}/resolve`, {
+      request<Approval>(workspace, clientId, `/approvals/${approvalId}/resolve`, {
         method: "POST",
         body: JSON.stringify({ outcome, actor_id: "demo-approver", reason }),
       }),
   },
   audit: {
-    list: () => request<AuditEvent[]>(workspace, "/audit-events?limit=100"),
+    list: () => request<AuditEvent[]>(workspace, clientId, "/audit-events?limit=100"),
   },
   localTest: {
-    status: () => request<LocalTestStatus>(workspace, "/local-test/status"),
-    load: () => request<LocalTestStatus>(workspace, "/local-test/load", { method: "POST" }),
-    reset: () => request<LocalTestStatus>(workspace, "/local-test/reset", { method: "POST" }),
+    status: () => request<LocalTestStatus>(workspace, clientId, "/local-test/status"),
+    load: () => request<LocalTestStatus>(workspace, clientId, "/local-test/load", { method: "POST" }),
+    reset: () => request<LocalTestStatus>(workspace, clientId, "/local-test/reset", { method: "POST" }),
   },
   };
 }

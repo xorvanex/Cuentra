@@ -23,14 +23,15 @@ const emptyData: DashboardData = {
   events: [],
 };
 
-export function useDashboardData(workspace: Workspace) {
-  const client = useMemo(() => createApi(workspace), [workspace]);
+export function useDashboardData(workspace: Workspace, browserClientId: string | null) {
+  const client = useMemo(() => createApi(workspace, browserClientId ?? undefined), [workspace, browserClientId]);
   const [data, setData] = useState<DashboardData>(emptyData);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async (background = false) => {
+    if (!browserClientId) return;
     if (background) setRefreshing(true);
     else setLoading(true);
     setError(null);
@@ -64,7 +65,7 @@ export function useDashboardData(workspace: Workspace) {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [client]);
+  }, [browserClientId, client]);
 
   useEffect(() => {
     void refresh();

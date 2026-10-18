@@ -20,7 +20,7 @@ app.add_middleware(
     allow_origins=settings.cors_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["Accept", "Content-Type", "X-Cuentra-Workspace"],
+    allow_headers=["Accept", "Content-Type", "X-Cuentra-Workspace", "X-Cuentra-Client-ID"],
 )
 app.include_router(health_router, prefix=settings.api_prefix)
 app.include_router(approvals_router, prefix=settings.api_prefix)
@@ -35,6 +35,7 @@ app.include_router(policies_router, prefix=settings.api_prefix)
 async def select_local_workspace(request: Request, call_next):
     """Rutea cada petición de demo al JSON local aislado de pruebas cuando se solicita."""
     workspace = request.headers.get("X-Cuentra-Workspace", "main").strip().lower()
+    client_id = request.headers.get("X-Cuentra-Client-ID", "").strip()
     if workspace not in {"main", "test"}:
         return JSONResponse(status_code=400, content={"detail": "Espacio de trabajo inválido"})
     if workspace == "test":
@@ -47,7 +48,16 @@ async def select_local_workspace(request: Request, call_next):
                 status_code=403,
                 content={"detail": "El espacio de pruebas solo está disponible en desarrollo local"},
             )
-    _, token = select_store(workspace)
+    if workspace == "main" and not client_id and settings.app_env.lower() in {"production", "prod"}:
+        if request.url.path not in {f"{settings.api_prefix}/health", "/"}:
+            return JSONResponse(
+                status_code=400,
+                content={"detail": "Falta el identificador del espacio de este navegador; recarga la aplicación."},
+            )
+    try:
+        _, token = select_store(workspace, client_id or None)
+    except ValueError as exc:
+        return JSONResponse(status_code=400, content={"detail": str(exc)})
     try:
         return await call_next(request)
     finally:

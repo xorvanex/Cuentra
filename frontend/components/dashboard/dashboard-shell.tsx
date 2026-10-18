@@ -13,17 +13,20 @@ import { TestWorkspaceView } from "@/components/dashboard/test-workspace-view";
 import { PoliciesView } from "@/components/dashboard/policies-view";
 import { ErrorNotice } from "@/components/ui/primitives";
 import { syntheticInvoicePolicy } from "@/lib/synthetic-policy";
+import { getBrowserClientId } from "@/lib/browser-client-id";
 
 export function DashboardShell() {
   const [view, setView] = useState<ViewKey>("overview");
   const [workspace, setWorkspace] = useState<Workspace>("main");
   const [localTestAvailable, setLocalTestAvailable] = useState(false);
+  const [browserClientId, setBrowserClientId] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [notice, setNotice] = useState<{ kind: "success" | "error"; message: string } | null>(null);
-  const { data, loading, refreshing, error, refresh, client } = useDashboardData(workspace);
+  const { data, loading, refreshing, error, refresh, client } = useDashboardData(workspace, browserClientId);
 
   useEffect(() => {
     setLocalTestAvailable(["localhost", "127.0.0.1", "::1"].includes(window.location.hostname));
+    setBrowserClientId(getBrowserClientId());
   }, []);
 
   function navigate(next: ViewKey) {

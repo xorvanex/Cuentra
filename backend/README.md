@@ -42,7 +42,9 @@ Las 12 fuentes están en `synthetic-invoices/`, junto con manifiesto, política 
 - `POST /api/v1/documents/extract`: extracción preliminar.
 - `/api/v1/local-test/*`: fixtures y reinicio del espacio aislado.
 
-Las rutas `/local-test` requieren entorno local y `X-Cuentra-Workspace: test`; las acciones solo cambian `backend/data/test_state.json`.
+En Railway, las peticiones de Operativos deben incluir `X-Cuentra-Client-ID` con un UUID generado y guardado por el frontend en el perfil del navegador. Cada UUID obtiene su propio archivo persistente en `backend/data/clients/<uuid>.json`; así dos navegadores no comparten facturas, políticas, aprobaciones ni auditoría. La ausencia de ese encabezado se permite en desarrollo para facilitar Swagger y las llamadas directas locales; en producción se exige para todas las rutas salvo health y raíz.
+
+Las rutas `/local-test` requieren entorno local y `X-Cuentra-Workspace: test`; las acciones solo cambian `backend/data/test_state.json`, común a la instancia local. El identificador del navegador no convierte la demo pública en un sistema autenticado: usa únicamente datos sintéticos.
 
 ## Reglas importantes
 

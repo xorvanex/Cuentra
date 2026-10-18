@@ -95,7 +95,9 @@ El proyecto puede desplegarse como dos servicios desde la rama `main`: `cuentra-
 
 Demo publicada: [cuentra-web-production-a24b.up.railway.app](https://cuentra-web-production-a24b.up.railway.app/). La API responde a través del proxy privado en `/api/v1/health`; no publiques el servicio `cuentra-api`. Esta demo no tiene autenticación y debe usarse solo con datos sintéticos.
 
-Este despliegue es únicamente una demo pública con datos sintéticos: no hay autenticación y cualquier visitante puede operar los datos de demostración desde la interfaz. No cargues facturas ni datos reales. El almacenamiento JSON y las aprobaciones de demostración no son adecuados para producción.
+En la demo pública, **Operativos tiene un espacio de datos separado para cada perfil de navegador**. El navegador conserva un identificador aleatorio en su almacenamiento local y lo envía a la API; Railway mantiene los JSON de cada espacio en el volumen persistente del backend (`backend/data/clients/`). Por tanto, otro perfil, navegador o dispositivo recibe un espacio vacío e independiente. Si borras los datos del sitio o cambias de perfil, se genera otro espacio; el anterior permanece guardado en el servidor y no se recupera automáticamente. El espacio **Pruebas locales** sigue siendo un archivo sintético separado y solo está disponible cuando se ejecuta en localhost.
+
+Esto aísla la demo por navegador, pero **no es autenticación ni una garantía de seguridad para datos confidenciales**: la aplicación no tiene cuentas y un identificador de espacio que alguien copie podría reutilizarse. El procesamiento ocurre en el servidor y los datos se almacenan en Railway; no son exclusivamente locales al computador. Usa únicamente facturas y políticas sintéticas. El antiguo estado compartido `runtime_state.json` no se migra a ningún navegador ni se elimina automáticamente.
 
 ## Qué recibe y cómo decide
 

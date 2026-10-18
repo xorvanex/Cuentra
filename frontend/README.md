@@ -22,6 +22,8 @@ Abre <http://localhost:3000>. Para usar npm, ejecuta `npm install` y `npm run de
 
 Demo pública actual: <https://cuentra-web-production-a24b.up.railway.app/>. La ruta <https://cuentra-web-production-a24b.up.railway.app/api/v1/health> debe responder `{"status":"ok"}`. Usa solo datos sintéticos: la demo no tiene autenticación.
 
+Cada perfil de navegador obtiene un identificador aleatorio persistido en `localStorage`; el backend usa ese identificador para mantener un JSON separado en Railway. Otro navegador, perfil o dispositivo comienza con un espacio Operativo vacío. Borrar los datos locales del sitio crea un identificador nuevo y no borra el JSON anterior del servidor. La interfaz y el procesamiento dependen del servicio remoto: esto es aislamiento por espacio, no almacenamiento exclusivamente local ni autenticación.
+
 En otra terminal desde la raíz inicia el backend:
 
 ```powershell
