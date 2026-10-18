@@ -6,6 +6,7 @@
 - Se creó un símbolo de marca original en SVG, aplicado al menú lateral y al favicon.
 - Se renombraron los encabezados internos del espacio de trabajo (`X-Cuentra-Workspace`) y las variables de configuración de almacenamiento y pruebas locales.
 - Se mantuvo el identificador físico anterior del volumen Docker para conservar los registros locales existentes; su nombre lógico en Compose ahora es `cuentra-data`.
+- Se adaptó el comando del contenedor backend para escuchar `PORT` cuando lo proporciona el hosting, manteniendo `8000` como valor por defecto local.
 - Se conservó el historial del proyecto y sus rutas de trabajo; la carpeta local y el repositorio Git mantienen por ahora sus nombres técnicos existentes.
 
 ## 2026-10-17 — README preparado para evaluación
