@@ -1,5 +1,20 @@
 # Registro de trabajo compartido
 
+## 2026-10-17 — README preparado para evaluación
+
+- Se reescribió el README principal como guía de entrada para evaluadores: resumen del reto, diagrama de flujo, inicio Docker en un comando, URLs, demo con facturas sintéticas, dependencias, OCR dentro del contenedor, persistencia, solución inicial de problemas y límites del prototipo.
+- Se añadieron insignias públicas de tecnologías; no forman parte del runtime ni condicionan la ejecución de la aplicación.
+- Se aclaró que el primer build necesita Internet para descargar imágenes y dependencias, pero el equipo anfitrión solo necesita Docker Desktop para ejecutar la demo.
+- Se contrastaron requisitos, nombres de carpetas y comandos con `docker-compose.yml`, los Dockerfiles, los archivos de entorno de ejemplo y los READMEs existentes. No se ejecutaron pruebas de la aplicación en esta edición documental.
+
+## 2026-10-17 — Limpieza final para entrega
+
+- Se redujo `docs/` a alcance del producto, arquitectura, seguridad y registro compartido; se retiraron checklist y guion de demo redundantes con los README y el flujo ya descrito en la app.
+- Se actualizaron referencias de continuidad para que las siguientes personas/agentes usen solo documentación vigente.
+- Se retiraron cachés reproducibles del repositorio (`.pytest_cache`, `.ruff_cache`, `__pycache__`, `.next` y `.pnpm-store`). Se conservaron `.venv` y `frontend/node_modules` como dependencias instaladas, los estados JSON locales, archivos de entorno, corpus sintético y configuraciones de ejecución.
+- Se validó `docker compose config` y se construyeron ambas imágenes (`docker compose build`). Luego se hizo un smoke test con un proyecto/volumen aislado: API health `ok`, frontend HTTP `200`; al terminar se retiraron esos contenedores, red y volumen temporales. El volumen del proyecto normal no se tocó.
+- `.pytest_cache` de backend permanece porque Windows denegó acceso incluso al intentar borrarlo; no contiene datos de usuario y queda ignorado por Git. Las demás cachés objetivo sí se retiraron.
+
 ## 2026-10-17 — Automatización de carga y empaquetado Docker
 
 - En Facturas se añadió carga múltiple secuencial: detección local, extracción por archivo, validación de campos obligatorios, creación y evaluación automática con la política de la moneda extraída. Si falta información o política compatible, ese archivo no se crea y se indica el motivo. Las excepciones visibles van a Aprobaciones.
