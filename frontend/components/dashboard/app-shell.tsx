@@ -48,6 +48,7 @@ export function AppShell({
   children: React.ReactNode;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const active = navigation.find((item) => item.id === view)?.label ?? "Resumen";
 
   function navigate(next: ViewKey) {
@@ -56,15 +57,15 @@ export function AppShell({
   }
 
   return (
-    <div className="app-frame">
+    <div className={`app-frame ${sidebarCollapsed ? "sidebar-layout-collapsed" : ""}`}>
       {menuOpen && <button className="mobile-scrim" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" />}
-      <aside className={`sidebar ${menuOpen ? "sidebar-open" : ""}`}>
+      <aside className={`sidebar ${menuOpen ? "sidebar-open" : ""} ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
         <div className="brand-lockup">
           <img className="brand-mark" src="/cuentra-mark.svg" alt="" />
           <span className="brand-name">Cuentra</span>
         </div>
 
-        <button type="button" className="workspace-switcher" onClick={() => navigate("overview")} aria-label="Ir al resumen de Cuentra">
+        <button type="button" className="workspace-switcher" onClick={() => navigate("overview")} aria-label="Ir al resumen de Cuentra" title={sidebarCollapsed ? "Cuentra · Control de operaciones" : undefined}>
           <span className="workspace-symbol"><CheckCheck size={16} /></span>
           <span><strong>Cuentra</strong><small>Control de operaciones</small></span>
           <ChevronRight size={15} />
@@ -73,7 +74,7 @@ export function AppShell({
         <p className="sidebar-caption">Espacio de trabajo</p>
         <nav className="primary-nav" id="primary-navigation" aria-label="Navegación principal">
           {navigation.map(({ id, label, icon: Icon }) => (
-            <button key={id} className={`nav-link ${view === id ? "nav-link-active" : ""}`} onClick={() => navigate(id)}>
+            <button key={id} className={`nav-link ${view === id ? "nav-link-active" : ""}`} title={sidebarCollapsed ? label : undefined} aria-label={label} onClick={() => navigate(id)}>
               <Icon size={17} strokeWidth={1.8} />
               <span>{label}</span>
               {id === "approvals" && pendingCount > 0 && <b className="nav-count">{pendingCount}</b>}
@@ -92,6 +93,7 @@ export function AppShell({
 
       <main className="main-area">
         <header className="topbar">
+          <button type="button" className="icon-button desktop-menu" onClick={() => setSidebarCollapsed((collapsed) => !collapsed)} aria-label={sidebarCollapsed ? "Expandir menú lateral" : "Contraer menú lateral"} aria-expanded={!sidebarCollapsed} aria-controls="primary-navigation"><Menu size={20} /></button>
           <button type="button" className={`icon-button mobile-menu ${menuOpen ? "mobile-menu-open" : ""}`} onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="primary-navigation"><Menu size={20} /></button>
           <div className="crumb"><button type="button" className="crumb-home" onClick={() => navigate("overview")}>Operaciones</button><ChevronRight size={14} /><strong aria-current="page">{active}</strong></div>
           <div className="topbar-right">

@@ -41,8 +41,10 @@ export function InvoicesView({
   return <>
     <section className="page-intro page-intro-compact">
       <div><p className="eyebrow">Operaciones / Registro</p><h1>Facturas <HelpTip label="Facturas">Sube documentos en lote. La aplicación detecta el tipo de archivo, extrae los campos disponibles, registra la factura y la evalúa con la política de su moneda. Los datos incompletos se detienen para evitar una decisión insegura.</HelpTip></h1><p>Revisa resultados y aprobaciones pendientes.</p></div>
-      <button className="button button-primary" onClick={() => setShowForm((value) => !value)}><Plus size={16} />Registrar factura</button>
+      <button className="button button-primary" disabled={data.policies.length === 0} title={data.policies.length ? "Registrar facturas desde documentos" : "Crea una política antes de ingresar facturas"} onClick={() => setShowForm((value) => !value)}><Plus size={16} />Registrar factura</button>
     </section>
+
+    {data.policies.length === 0 && <section className="invoice-policy-required" role="status"><ShieldCheck size={18} /><div><strong>Configura una política antes de ingresar facturas</strong><p>Las facturas solo se pueden registrar y evaluar cuando existe al menos una política activa. Ve a <b>Políticas</b>, crea una y vuelve aquí.</p></div></section>}
 
     {showForm && <CreateInvoiceForm policies={data.policies} onExtract={onExtract} onCreate={onCreate} onEvaluate={onEvaluate} busyId={busyId} onCancel={() => setShowForm(false)} />}
 
@@ -87,7 +89,7 @@ function CreateInvoiceForm({ policies, onExtract, onCreate, onEvaluate, busyId, 
   const [results, setResults] = useState<string[]>([]);
 
   async function processFiles() {
-    if (!files.length) return;
+    if (!files.length || policies.length === 0) return;
     setProcessing(true);
     setResults([]);
     const report: string[] = [];
@@ -129,7 +131,12 @@ function CreateInvoiceForm({ policies, onExtract, onCreate, onEvaluate, busyId, 
 
   return <section className="surface create-invoice-form">
     <div className="form-heading"><div><p className="eyebrow">Ingreso automático</p><h2>Subir facturas</h2><p>Selecciona uno o varios documentos. El sistema detecta el canal, extrae datos, registra y evalúa cada factura con la política de su moneda.</p></div><button type="button" className="icon-button" onClick={onCancel} aria-label="Cerrar formulario"><X size={18} /></button></div>
-    <section className="document-ingest"><div className="document-ingest-title"><FileSearch size={16} /><div><strong>Procesamiento local y automático</strong><small>PDF, PNG/JPG, correo .eml o texto .txt. Solo los casos ESCALATE requieren aprobación humana.</small></div></div><div className="document-ingest-controls"><input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.eml,.txt,application/pdf,image/png,image/jpeg,message/rfc822,text/plain" onChange={(event) => { setFiles(Array.from(event.target.files ?? [])); setResults([]); }} /><button type="button" className="button button-primary" disabled={!files.length || processing || Boolean(busyId)} onClick={() => void processFiles()}><Upload size={14} />{processing ? "Procesando documentos…" : `Procesar ${files.length || "documentos"}`}</button></div>{files.length > 0 && <small>{files.map((file) => file.name).join(" · ")}</small>}</section>
+    {policies.length === 0 ? <div className="invoice-policy-required" role="alert"><ShieldCheck size={18} /><div><strong>No se pueden ingresar facturas todavía</strong><p>Crea primero una política de pago activa. Cada documento debe tener reglas aplicables antes de registrarse y evaluarse.</p></div></div> : <section className="document-ingest">
+      <div className="document-ingest-title"><FileSearch size={16} /><div><strong>Ingreso de documentos</strong><small>Admite PDF, PNG/JPG, correo .eml y texto .txt. La selección es local; el archivo se envía al backend al procesarlo.</small></div></div>
+      <div className="document-upload-step"><div><strong>1. Selecciona los documentos</strong><small>Puedes elegir uno o varios archivos a la vez.</small></div><label className="button button-secondary document-select-button"><Upload size={14} />Seleccionar archivos<input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.eml,.txt,application/pdf,image/png,image/jpeg,message/rfc822,text/plain" disabled={processing || Boolean(busyId)} onChange={(event) => { setFiles(Array.from(event.target.files ?? [])); setResults([]); }} /></label></div>
+      {files.length > 0 && <div className="document-selected-list" aria-live="polite"><strong>{files.length} {files.length === 1 ? "archivo seleccionado" : "archivos seleccionados"}</strong><span>{files.map((file) => file.name).join(" · ")}</span></div>}
+      <div className="document-process-step"><div><strong>2. Procesa las facturas</strong><small>Extrae los datos, registra cada factura y aplica la política de su moneda. Solo los casos ESCALATE requieren aprobación humana.</small></div><button type="button" className="button button-primary" disabled={!files.length || processing || Boolean(busyId)} onClick={() => void processFiles()}><FileSearch size={14} />{processing ? "Procesando documentos…" : `Procesar ${files.length || "documentos"}`}</button></div>
+    </section>}
     {results.length > 0 && <div className="extraction-review" role="status"><strong>Resultado por archivo</strong>{results.map((result) => <span key={result}>{result}</span>)}</div>}
     <div className="form-actions"><button type="button" className="button button-secondary" onClick={onCancel}>Cerrar</button></div>
   </section>;

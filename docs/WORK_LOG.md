@@ -253,3 +253,10 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 - Los logs confirmaron que FastAPI escucha en el puerto `8080`, no `8000`; se actualizó `CUENTRA_API_ORIGIN` a `http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8080` en `cuentra-web` y se aplicó el cambio.
 - Verificación pública: `/api/v1/health` devolvió `{"status":"ok"}` por medio del proxy; la página principal confirmó `API conectada` y `API en línea`. El dominio previo `cuentra-web-production.up.railway.app` sigue configurado con target port 3000 y no debe compartirse; usar el dominio `...-a24b`.
 - Commit `d6d94fb fix: proxy Railway API calls at runtime` subido a `origin/main`. Los README se actualizaron con la URL y el puerto. No generar dominio público para `cuentra-api`.
+
+## 2026-10-18 — Ingreso de facturas y navegación responsive
+
+- Se separó la selección local de archivos del procesamiento que los envía al backend; cada etapa ahora tiene su propio texto y acción, con contador/listado de documentos seleccionados.
+- La pantalla de facturas deshabilita el ingreso y explica que hace falta crear una política activa antes de registrar documentos. El formulario también impide procesar si no hay políticas.
+- Se añadió el control funcional de contraer/expandir el menú lateral en escritorio. Al contraerlo quedan visibles el logo y los iconos; navegación móvil mantiene su menú superpuesto.
+- Verificación: `pnpm typecheck` en `frontend` pasó (`tsc --noEmit`).
