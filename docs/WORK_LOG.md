@@ -1,5 +1,12 @@
 # Registro de trabajo compartido
 
+## 2026-10-18 — Recorrido guiado del espacio de pruebas
+
+- Al entrar a **Pruebas locales** en localhost, la UI cambia al espacio aislado y conserva la selección al navegar por Facturas, Aprobaciones y Auditoría.
+- Se añadió **Cargar y abrir facturas**: prepara la política y las tres facturas sintéticas, y luego abre Facturas automáticamente. La pantalla muestra un recorrido de tres pasos con enlaces a facturas, aprobaciones y registro.
+- En Railway, la sección ya no intenta usar endpoints locales que el backend bloquea con 403. Explica el alcance local y ofrece volver al espacio Operativo en un clic.
+- Se actualizaron README raíz y frontend. Pendiente: correr `pnpm typecheck` y confirmar commit/despliegue.
+
 ## 2026-10-18 — Cambio de identidad a Cuentra
 
 - Se sustituyó la identidad visible del producto por **Cuentra** en la interfaz, metadatos, documentación y configuración versionada.

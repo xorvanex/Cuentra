@@ -39,7 +39,9 @@ Los binarios no se almacenan; el texto extraído sí se conserva para explicar p
 
 ## Espacio de pruebas y corpus
 
-El selector **Pruebas locales** dirige peticiones con `X-Cuentra-Workspace: test` a `backend/data/test_state.json`. El botón de carga agrega fixtures sencillos; el reinicio pide confirmación. Para usar los 12 documentos de `synthetic-invoices/`, entra a Facturas dentro del mismo espacio y súbelos en lote; usa la política USD y sigue el orden de presupuesto en el README del corpus.
+Al entrar a **Pruebas locales** en `localhost`, la interfaz cambia automáticamente a `X-Cuentra-Workspace: test` y mantiene ese espacio al navegar a Facturas, Aprobaciones y Registro de actividad. El botón **Cargar y abrir facturas** agrega fixtures sencillos y te lleva al primer paso; el reinicio pide confirmación. Para usar los 12 documentos de `synthetic-invoices/`, súbelos en lote desde Facturas dentro del mismo espacio; usa la política USD y sigue el orden de presupuesto en el README del corpus.
+
+El backend restringe ese espacio a desarrollo local (`APP_ENV=development|test` y loopback, salvo habilitación local explícita). En Railway, la sección muestra una explicación y un botón para regresar a Operativos; no intenta enviar peticiones de test que el backend rechazará con 403.
 
 La UI muestra decisiones APPROVE/BLOCK/ESCALATE, aprobaciones pendientes, historial y explicación. Solo ESCALATE crea una aprobación. La resolución requiere actor y motivo; en esta demo el actor configurado es `demo-approver` y no representa autenticación real.
 

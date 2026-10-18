@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AlertTriangle, Check, X } from "lucide-react";
 import { type FinalOutcome, type InvoiceCreate, type PolicyCreate, type Workspace } from "@/lib/api";
 import { useDashboardData } from "@/lib/use-dashboard-data";
@@ -16,16 +16,30 @@ import { ErrorNotice } from "@/components/ui/primitives";
 export function DashboardShell() {
   const [view, setView] = useState<ViewKey>("overview");
   const [workspace, setWorkspace] = useState<Workspace>("main");
+  const [localTestAvailable, setLocalTestAvailable] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [notice, setNotice] = useState<{ kind: "success" | "error"; message: string } | null>(null);
   const { data, loading, refreshing, error, refresh, client } = useDashboardData(workspace);
 
+  useEffect(() => {
+    setLocalTestAvailable(["localhost", "127.0.0.1", "::1"].includes(window.location.hostname));
+  }, []);
+
   function navigate(next: ViewKey) {
-    if (next === "test") setWorkspace("test");
+    if (next === "test") {
+      setWorkspace(localTestAvailable ? "test" : "main");
+      setNotice(null);
+    }
     setView(next);
   }
 
   function changeWorkspace(next: Workspace) {
+    if (next === "test" && !localTestAvailable) {
+      setWorkspace("main");
+      setView("test");
+      setNotice(null);
+      return;
+    }
     setWorkspace(next);
     setView(next === "test" ? "test" : "overview");
     setNotice(null);
@@ -122,7 +136,7 @@ export function DashboardShell() {
     }
   }
 
-  return <AppShell view={view} onNavigate={navigate} workspace={workspace} onWorkspaceChange={changeWorkspace} pendingCount={data.approvals.length} connected={data.connected} refreshing={refreshing} onRefresh={refresh}>
+  return <AppShell view={view} onNavigate={navigate} workspace={workspace} testWorkspaceAvailable={localTestAvailable} onWorkspaceChange={changeWorkspace} pendingCount={data.approvals.length} connected={data.connected} refreshing={refreshing} onRefresh={refresh}>
     {error && <ErrorNotice message={error} onRetry={refresh} />}
     {notice && <div className={`toast toast-${notice.kind}`} role="status"><span>{notice.kind === "success" ? <Check size={16} /> : <AlertTriangle size={16} />}{notice.message}</span><button className="icon-button" onClick={() => setNotice(null)} aria-label="Cerrar aviso"><X size={16} /></button></div>}
     {loading ? <div className="loading-state"><span className="loading-spinner" /><span>Conectando con el backend…</span></div> : <>
@@ -131,7 +145,7 @@ export function DashboardShell() {
       {view === "approvals" && <ApprovalsView data={data} busyId={busyId} onResolve={resolveApproval} />}
       {view === "audit" && <AuditView data={data} />}
       {view === "policies" && <PoliciesView data={data} busy={busyId === "policy"} onSave={savePolicy} />}
-      {view === "test" && <TestWorkspaceView data={data} busy={busyId === "local-test"} onLoad={loadLocalTestData} onReset={resetLocalTestData} />}
+      {view === "test" && <TestWorkspaceView data={data} localOnly={localTestAvailable} busy={busyId === "local-test"} onLoad={loadLocalTestData} onReset={resetLocalTestData} onNavigate={navigate} onReturnToDemo={() => changeWorkspace("main")} />}
     </>}
   </AppShell>;
 }

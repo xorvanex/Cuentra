@@ -254,6 +254,18 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 .test-workspace-actions h2 { margin: 0; font-size: 16px; font-weight: 620; }
 .test-workspace-actions p:last-child { max-width: 680px; margin: 7px 0 0; color: #77858a; font-size: 11px; line-height: 1.6; }
 .test-workspace-buttons { display: flex; flex-wrap: wrap; gap: 9px; }
+.test-workspace-remote .button { margin-top: 12px; }
+.test-workspace-guide { padding: 21px; }
+.test-workspace-guide-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+.test-workspace-guide-heading h2 { margin: 0; font-size: 16px; font-weight: 620; }
+.test-workspace-guide-heading p:last-child { margin: 6px 0 0; color: #77858a; font-size: 10px; line-height: 1.5; }
+.test-workspace-steps { display: grid; }
+.test-workspace-step { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; gap: 13px; padding: 15px 0; border-bottom: 1px solid #edf0ee; }
+.test-step-number { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; color: #346a59; background: #e7f1e9; font-size: 11px; font-weight: 700; }
+.test-workspace-step strong { color: #344c51; font-size: 11px; }
+.test-workspace-step p { margin: 4px 0 0; color: #77858a; font-size: 9px; line-height: 1.5; }
+.test-workspace-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; color: #78878b; font-size: 9px; }
+.test-workspace-footer > span, .test-workspace-footer .quiet-link { display: inline-flex; align-items: center; gap: 7px; }
 .document-ingest { margin: 0 0 15px; padding: 14px; border: 1px dashed #cbd9d1; border-radius: 7px; background: #f8fbf8; }
 .document-ingest-title { display: flex; align-items: flex-start; gap: 9px; color: #3e7464; }
 .document-ingest-title > svg { flex: 0 0 auto; margin-top: 1px; }
@@ -382,6 +394,10 @@ button:disabled { cursor: not-allowed; opacity: .58; }
   .topbar-right { gap: 9px; }
   .document-upload-step, .document-process-step { align-items: stretch; flex-direction: column; }
   .document-select-button, .document-process-step .button { justify-content: center; }
+  .test-workspace-guide-heading { align-items: stretch; flex-direction: column; }
+  .test-workspace-step { grid-template-columns: 27px minmax(0, 1fr); }
+  .test-workspace-step .button { grid-column: 2; justify-content: center; }
+  .test-workspace-footer { align-items: flex-start; flex-direction: column; }
   .workspace-select-label > span { display: none; }
   .workspace-select-label select { max-width: 86px; padding: 0 4px; font-size: 9px; }
   .api-label { font-size: 0; }

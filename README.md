@@ -65,7 +65,9 @@ Abre la aplicación:
 - **API interactiva (Swagger):** <http://localhost:8000/docs>
 - **Estado de la API:** <http://localhost:8000/api/v1/health>
 
-En la interfaz, entra a **Pruebas locales** y pulsa **Cargar datos de prueba** para preparar una política USD y tres facturas sintéticas. Después puedes revisar Facturas, Aprobaciones y Registro de actividad. Para usar el conjunto completo de 12 archivos, mantente en ese espacio y carga los documentos desde `synthetic-invoices/`; el [README del corpus](synthetic-invoices/README.md) describe los casos y el orden requerido para demostrar el límite de presupuesto.
+En una ejecución local, entra a **Pruebas locales** y pulsa **Cargar y abrir facturas**. Cuentra selecciona automáticamente el espacio aislado, carga una política USD y tres facturas sintéticas, y abre Facturas. Desde allí puedes navegar a Aprobaciones y Registro de actividad sin cambiar el selector superior; el espacio queda marcado como **Pruebas**. Para usar el conjunto completo de 12 archivos, mantente en ese espacio y carga los documentos desde `synthetic-invoices/`; el [README del corpus](synthetic-invoices/README.md) describe los casos y el orden requerido para demostrar el límite de presupuesto.
+
+El espacio **Pruebas locales** está restringido a localhost por seguridad y no se puede cargar ni reiniciar desde Railway. En la demo publicada, esa sección explica la limitación y permite volver al espacio operativo con un clic. Para probar el recorrido aislado, ejecuta el proyecto con Docker y abre `http://localhost:3000`.
 
 Para ver la salida de los contenedores:
 

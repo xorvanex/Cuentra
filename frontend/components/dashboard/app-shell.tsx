@@ -30,6 +30,7 @@ export function AppShell({
   view,
   onNavigate,
   workspace,
+  testWorkspaceAvailable,
   onWorkspaceChange,
   pendingCount,
   connected,
@@ -40,6 +41,7 @@ export function AppShell({
   view: ViewKey;
   onNavigate: (view: ViewKey) => void;
   workspace: Workspace;
+  testWorkspaceAvailable: boolean;
   onWorkspaceChange: (workspace: Workspace) => void;
   pendingCount: number;
   connected: boolean;
@@ -97,7 +99,7 @@ export function AppShell({
           <button type="button" className={`icon-button mobile-menu ${menuOpen ? "mobile-menu-open" : ""}`} onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="primary-navigation"><Menu size={20} /></button>
           <div className="crumb"><button type="button" className="crumb-home" onClick={() => navigate("overview")}>Operaciones</button><ChevronRight size={14} /><strong aria-current="page">{active}</strong></div>
           <div className="topbar-right">
-            <label className="workspace-select-label"><span>Datos</span><select aria-label="Espacio de datos" value={workspace} onChange={(event) => onWorkspaceChange(event.target.value as Workspace)}><option value="main">Operativos</option><option value="test">Pruebas</option></select></label>
+            <label className="workspace-select-label"><span>Datos</span><select aria-label="Espacio de datos" value={workspace} onChange={(event) => onWorkspaceChange(event.target.value as Workspace)}><option value="main">Operativos</option>{testWorkspaceAvailable && <option value="test">Pruebas locales</option>}</select></label>
             <span className={`api-label ${connected ? "" : "api-label-offline"}`}><i />{connected ? "API en línea" : "Sin conexión"}</span>
             <button className="refresh-button" onClick={onRefresh} disabled={refreshing} title="Actualizar datos">
               <RefreshCw size={15} className={refreshing ? "spin" : ""} /><span>Actualizar</span>
