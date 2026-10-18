@@ -240,3 +240,12 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 - No se iniciaron servidores ni se ejecutó build de Next.js en esta sesión. No se cambió código del frontend; se mantuvo su `node_modules` local para que siga ejecutable.
 - Pendiente para cierre: recorrer manualmente en navegador los 12 documentos dentro del workspace de pruebas y capturar evidencia visual de aceptación.
 
+# 2026-10-18 — Despliegue Railway y API privada
+
+- Se configuró el proyecto Railway `Cuentra` y el servicio `cuentra-api` conectado a `xorvanex/blinka-guard`, rama `main`, usando `/backend/Dockerfile`.
+- Se montó `cuentra-api-volume` en `/app/backend/data` y se configuró `RAILWAY_RUN_UID=0` para permitir la escritura en el volumen montado por Railway.
+- El backend se construyó con Python 3.11 y Tesseract inglés/español; Railway confirmó que pasó `/api/v1/health`. La API sigue privada.
+- Se creó el servicio `cuentra-web`, conectado a la misma rama, con raíz `/frontend` y Dockerfile `/frontend/Dockerfile`.
+- Para evitar publicar una API sin autenticación, se añadió una reescritura de Next.js que manda `/api/v1/*` hacia `CUENTRA_API_ORIGIN`. Railway debe resolver ese origen mediante `${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`, y el cliente público debe apuntar a `/api/v1`.
+- Actualizados los README y documentos de arquitectura/seguridad para indicar los ajustes de Railway y el riesgo residual de una demo pública sin autenticación. Usar solo datos sintéticos.
+- Pendiente: commit/push de esta configuración; establecer las dos variables de `cuentra-web`; aplicar cambios Railway, desplegar frontend y generar su dominio público. No generar dominio público para `cuentra-api`.

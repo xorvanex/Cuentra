@@ -85,6 +85,12 @@ El estado se guarda en el volumen persistente de Compose `cuentra-data`, separad
 
 Comparte el repositorio o una copia de los archivos versionados, incluyendo `docker-compose.yml`, `backend/`, `frontend/` y `synthetic-invoices/`. La persona instala Docker Desktop, abre la carpeta en una terminal y ejecuta los comandos de inicio anteriores. No empaquetes `.env`, `.venv`, `frontend/node_modules`, cachés ni archivos `runtime_state.json`/`test_state.json`; Docker genera las dependencias y los estados localmente. La primera ejecución necesita Internet; una vez construidas las imágenes, los siguientes inicios no reconstruyen salvo que se solicite `--build`.
 
+## Despliegue de demo en Railway
+
+El proyecto puede desplegarse como dos servicios desde la rama `main`: `cuentra-api` con `/backend/Dockerfile` y el volumen en `/app/backend/data`, y `cuentra-web` con raíz `/frontend` y `/frontend/Dockerfile`. Configura en el servicio web `NEXT_PUBLIC_API_BASE_URL=/api/v1` y `CUENTRA_API_ORIGIN=http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`. Next.js reenvía las llamadas al host privado Railway; genera un dominio público solo para `cuentra-web` y mantén `cuentra-api` privado.
+
+Este despliegue es únicamente una demo pública con datos sintéticos: no hay autenticación y cualquier visitante puede operar los datos de demostración desde la interfaz. No cargues facturas ni datos reales. El almacenamiento JSON y las aprobaciones de demostración no son adecuados para producción.
+
 ## Qué recibe y cómo decide
 
 La carga acepta varios documentos en lote:

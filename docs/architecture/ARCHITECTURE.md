@@ -4,7 +4,7 @@
 
 ## Contexto
 
-Operador de finanzas → frontend web local → API FastAPI → motor determinista y repositorio JSON. El sistema no llama servicios externos ni inicia pagos. La carga por lote extrae, registra y evalúa automáticamente los documentos completos; la persona interviene al resolver escaladas o corregir archivos incompletos.
+Operador de finanzas → frontend web → proxy de Next.js → API FastAPI → motor determinista y repositorio JSON. En Railway el frontend llama al backend mediante su dominio privado `railway.internal`; el navegador solo necesita el dominio público del frontend. El sistema no llama servicios externos ni inicia pagos. La carga por lote extrae, registra y evalúa automáticamente los documentos completos; la persona interviene al resolver escaladas o corregir archivos incompletos.
 
 ## Componentes
 

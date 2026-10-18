@@ -19,7 +19,7 @@
 
 ## Riesgos residuales
 
-- No hay autenticación/identidad real; el actor de aprobador es de demo. No publicar la API.
+- No hay autenticación/identidad real; el actor de aprobador es de demo. No publicar la API. En Railway debe quedar sin dominio público y recibir solicitudes por el proxy del frontend en la red privada.
 - El almacenamiento JSON y el bloqueo son para un proceso local, no para concurrencia multi-instancia.
 - Sin Tesseract en el equipo, las imágenes necesitan captura manual; OCR puede equivocarse incluso instalado.
 - Sin cambio FX; una moneda distinta a la política se bloquea.
