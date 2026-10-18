@@ -187,6 +187,9 @@ export function createApi(workspace: Workspace = "main", clientId?: string) {
     load: () => request<LocalTestStatus>(workspace, clientId, "/local-test/load", { method: "POST" }),
     reset: () => request<LocalTestStatus>(workspace, clientId, "/local-test/reset", { method: "POST" }),
   },
+  workspace: {
+    reset: () => request<{ status: string; message: string }>(workspace, clientId, "/workspace/reset", { method: "POST" }),
+  },
   };
 }
 

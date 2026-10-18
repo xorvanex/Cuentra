@@ -123,6 +123,26 @@ export function DashboardShell() {
     }
   }
 
+  async function resetCurrentWorkspace() {
+    const confirmed = window.confirm(
+      "Esto borrará de forma permanente las facturas, políticas, decisiones, aprobaciones y actividad de este navegador. No afecta los datos de otras personas. ¿Quieres dejar este espacio vacío?",
+    );
+    if (!confirmed) return;
+    setBusyId("workspace-reset");
+    setNotice(null);
+    try {
+      await client.workspace.reset();
+      await refresh();
+      setView("overview");
+      setNotice({ kind: "success", message: "Espacio reiniciado. Ya puedes comenzar desde cero." });
+    } catch (caught) {
+      const message = caught instanceof Error ? caught.message : "No se pudo reiniciar este espacio.";
+      setNotice({ kind: "error", message });
+    } finally {
+      setBusyId(null);
+    }
+  }
+
   async function savePolicy(payload: PolicyCreate, policyId?: string) {
     setBusyId("policy");
     setNotice(null);
@@ -178,7 +198,7 @@ export function DashboardShell() {
     {error && <ErrorNotice message={error} onRetry={refresh} />}
     {notice && <div className={`toast toast-${notice.kind}`} role="status"><span>{notice.kind === "success" ? <Check size={16} /> : <AlertTriangle size={16} />}{notice.message}</span><button className="icon-button" onClick={() => setNotice(null)} aria-label="Cerrar aviso"><X size={16} /></button></div>}
     {loading ? <div className="loading-state"><span className="loading-spinner" /><span>Conectando con el backend…</span></div> : <>
-      {view === "overview" && <OverviewView data={data} onNavigate={navigate} />}
+      {view === "overview" && <OverviewView data={data} onNavigate={navigate} onReset={() => void resetCurrentWorkspace()} resetBusy={busyId === "workspace-reset"} />}
       {view === "invoices" && <InvoicesView data={data} busyId={busyId} onCreate={createInvoice} onEvaluate={evaluateInvoice} onExtract={(file, channel) => client.documents.extract(file, channel)} />}
       {view === "approvals" && <ApprovalsView data={data} busyId={busyId} onResolve={resolveApproval} />}
       {view === "audit" && <AuditView data={data} />}

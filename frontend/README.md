@@ -24,6 +24,8 @@ Demo pública actual: <https://cuentra-web-production-a24b.up.railway.app/>. La 
 
 Cada perfil de navegador obtiene un identificador aleatorio persistido en `localStorage`; el backend usa ese identificador para mantener un JSON separado en Railway. Otro navegador, perfil o dispositivo comienza con un espacio Operativo vacío. Borrar los datos locales del sitio crea un identificador nuevo y no borra el JSON anterior del servidor. La interfaz y el procesamiento dependen del servicio remoto: esto es aislamiento por espacio, no almacenamiento exclusivamente local ni autenticación.
 
+Desde **Resumen → Reiniciar mis datos** se puede dejar vacío el espacio del navegador actual. Tras la confirmación se borran sus facturas, políticas, decisiones, aprobaciones y auditoría. La acción no afecta a otros navegadores ni al espacio de Pruebas locales.
+
 En otra terminal desde la raíz inicia el backend:
 
 ```powershell

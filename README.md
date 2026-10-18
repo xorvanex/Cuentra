@@ -85,6 +85,8 @@ docker compose down
 
 El estado se guarda en el volumen persistente de Compose `cuentra-data`, separado de los archivos locales ignorados por Git. El identificador físico existente se conserva para que el cambio de marca no desconecte los datos guardados. **No ejecutes `docker compose down -v` salvo que quieras borrar permanentemente ese volumen y todos los datos guardados en él.**
 
+Para empezar de cero en la aplicación, vuelve a **Resumen** y pulsa **Reiniciar mis datos**. Tras confirmar, se borran las facturas, políticas, decisiones, aprobaciones y eventos del espacio Operativo de ese navegador; otros navegadores y el espacio de Pruebas locales no cambian. La operación no se puede deshacer. En la demo pública también elimina el JSON de ese UUID en Railway.
+
 ### Compartir la demo con otra persona
 
 Comparte el repositorio o una copia de los archivos versionados, incluyendo `docker-compose.yml`, `backend/`, `frontend/` y `synthetic-invoices/`. La persona instala Docker Desktop, abre la carpeta en una terminal y ejecuta los comandos de inicio anteriores. No empaquetes `.env`, `.venv`, `frontend/node_modules`, cachés ni archivos `runtime_state.json`/`test_state.json`; Docker genera las dependencias y los estados localmente. La primera ejecución necesita Internet; una vez construidas las imágenes, los siguientes inicios no reconstruyen salvo que se solicite `--build`.

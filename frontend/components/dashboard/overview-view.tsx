@@ -1,10 +1,10 @@
-import { ArrowUpRight, AlertTriangle, CheckCircle2, Clock3, FileText, ShieldX } from "lucide-react";
+import { ArrowUpRight, AlertTriangle, CheckCircle2, Clock3, FileText, ShieldX, Trash2 } from "lucide-react";
 import type { DashboardData } from "@/lib/use-dashboard-data";
 import { auditActionLabel, formatDate, formatMoney, latestDecision } from "@/lib/format";
 import { EmptyState, PanelHeading, StatusBadge } from "@/components/ui/primitives";
 import type { ViewKey } from "@/components/dashboard/app-shell";
 
-export function OverviewView({ data, onNavigate }: { data: DashboardData; onNavigate: (view: ViewKey) => void }) {
+export function OverviewView({ data, onNavigate, onReset, resetBusy }: { data: DashboardData; onNavigate: (view: ViewKey) => void; onReset: () => void; resetBusy: boolean }) {
   const approved = data.invoices.filter((invoice) => latestDecision(data.decisions[invoice.id])?.outcome === "APPROVE").length;
   const blocked = data.invoices.filter((invoice) => latestDecision(data.decisions[invoice.id])?.outcome === "BLOCK").length;
   const reviewed = Object.values(data.decisions).flat().length;
@@ -13,7 +13,7 @@ export function OverviewView({ data, onNavigate }: { data: DashboardData; onNavi
   return <>
     <section className="page-intro">
       <div><p className="eyebrow">{date}</p><h1>Control de operaciones</h1><p>Facturas evaluadas, excepciones y decisiones en un mismo lugar.</p></div>
-      <button className="button button-primary" onClick={() => onNavigate("invoices")}><FileText size={16} />Abrir facturas<ArrowUpRight size={15} /></button>
+      <div className="page-intro-actions"><button className="button button-secondary" disabled={resetBusy} onClick={onReset} title="Borra los datos de este espacio de navegador"><Trash2 size={15} />{resetBusy ? "Reiniciando…" : "Reiniciar mis datos"}</button><button className="button button-primary" onClick={() => onNavigate("invoices")}><FileText size={16} />Abrir facturas<ArrowUpRight size={15} /></button></div>
     </section>
 
     <section className="summary-strip" aria-label="Resumen de facturas">

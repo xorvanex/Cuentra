@@ -11,6 +11,7 @@ from app.api.routes.health import router as health_router
 from app.api.routes.invoices import router as invoices_router
 from app.api.routes.local_test import router as local_test_router
 from app.api.routes.policies import router as policies_router
+from app.api.routes.workspace import router as workspace_router
 from app.core.config import settings
 from app.repositories.local_json import restore_store, select_store
 
@@ -29,6 +30,7 @@ app.include_router(invoices_router, prefix=settings.api_prefix)
 app.include_router(local_test_router, prefix=settings.api_prefix)
 app.include_router(documents_router, prefix=settings.api_prefix)
 app.include_router(policies_router, prefix=settings.api_prefix)
+app.include_router(workspace_router, prefix=settings.api_prefix)
 
 
 @app.middleware("http")

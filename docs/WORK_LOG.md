@@ -1,5 +1,11 @@
 # Registro de trabajo compartido
 
+## 2026-10-18 — Reinicio del espacio Operativo del navegador
+
+- Se añadió `POST /api/v1/workspace/reset`, limitado al espacio Operativo identificado por el UUID actual. No acepta el espacio de pruebas ni el estado compartido sin identificador.
+- En Resumen se agregó **Reiniciar mis datos**, con confirmación explícita y resultado visible. Borra facturas, políticas, decisiones, aprobaciones y eventos del UUID actual para volver al estado inicial vacío.
+- Se documentó el alcance local/publicado y que la acción es irreversible para ese espacio; no toca otros navegadores ni Pruebas locales.
+
 ## 2026-10-18 — Aislamiento de datos Operativos por navegador
 
 - Se corrigió la explicación del despliegue: antes el backend público guardaba todos los datos Operativos en un mismo `runtime_state.json` de Railway, por lo que visitantes podían compartir el estado. Esa descripción debió aclararse antes.
