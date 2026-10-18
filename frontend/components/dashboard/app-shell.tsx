@@ -58,6 +58,14 @@ export function AppShell({
     setMenuOpen(false);
   }
 
+  function toggleNavigation() {
+    if (window.matchMedia("(max-width: 780px)").matches) {
+      setMenuOpen((open) => !open);
+      return;
+    }
+    setSidebarCollapsed((collapsed) => !collapsed);
+  }
+
   return (
     <div className={`app-frame ${sidebarCollapsed ? "sidebar-layout-collapsed" : ""}`}>
       {menuOpen && <button className="mobile-scrim" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" />}
@@ -95,8 +103,7 @@ export function AppShell({
 
       <main className="main-area">
         <header className="topbar">
-          <button type="button" className="icon-button desktop-menu" onClick={() => setSidebarCollapsed((collapsed) => !collapsed)} aria-label={sidebarCollapsed ? "Expandir menú lateral" : "Contraer menú lateral"} aria-expanded={!sidebarCollapsed} aria-controls="primary-navigation"><Menu size={20} /></button>
-          <button type="button" className={`icon-button mobile-menu ${menuOpen ? "mobile-menu-open" : ""}`} onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="primary-navigation"><Menu size={20} /></button>
+          <button type="button" className={`icon-button menu-toggle ${menuOpen ? "menu-toggle-open" : ""}`} onClick={toggleNavigation} aria-label={menuOpen ? "Cerrar menú" : sidebarCollapsed ? "Expandir menú lateral" : "Contraer menú lateral"} aria-expanded={menuOpen || !sidebarCollapsed} aria-controls="primary-navigation"><Menu size={20} /></button>
           <div className="crumb"><button type="button" className="crumb-home" onClick={() => navigate("overview")}>Operaciones</button><ChevronRight size={14} /><strong aria-current="page">{active}</strong></div>
           <div className="topbar-right">
             <label className="workspace-select-label"><span>Datos</span><select aria-label="Espacio de datos" value={workspace} onChange={(event) => onWorkspaceChange(event.target.value as Workspace)}><option value="main">Operativos</option>{testWorkspaceAvailable && <option value="test">Pruebas locales</option>}</select></label>

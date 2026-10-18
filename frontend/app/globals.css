@@ -58,8 +58,8 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 .connection-card small { margin-top: 4px; color: #8da5a5; font-size: 10px; }
 .sidebar-footer-label { padding: 15px 10px 0; color: #7f989a; font-size: 9px; letter-spacing: .1em; }
 .sidebar-footer-label span { padding: 0 3px; color: var(--lime); }
-.mobile-menu, .mobile-scrim { display: none; }
-.desktop-menu { display: grid; flex: 0 0 auto; margin-right: 4px; }
+.mobile-scrim { display: none; }
+.menu-toggle { display: grid; flex: 0 0 auto; margin-right: 4px; }
 .help-tip-wrap { position: relative; display: inline-flex; vertical-align: middle; margin-left: 4px; }
 .help-tip-button { width: 22px; height: 22px; display: inline-grid; place-items: center; padding: 0; border: 0; border-radius: 50%; color: #71858a; background: transparent; vertical-align: middle; }
 .help-tip-button:hover, .help-tip-button:focus-visible { color: var(--teal); background: #e8f1ee; }
@@ -369,12 +369,10 @@ button:disabled { cursor: not-allowed; opacity: .58; }
   .sidebar { width: 250px; transform: translateX(-102%); transition: transform .18s ease; }
   .sidebar-open { transform: translateX(0); }
   .mobile-scrim { position: fixed; inset: 0; z-index: 25; display: block; border: 0; background: #0d202b77; }
-  .mobile-menu { display: grid; }
-  .desktop-menu { display: none; }
-  .mobile-menu-open { position: fixed; z-index: 35; top: 27px; left: 204px; color: #eaf4ef; }
+  .menu-toggle-open { position: fixed; z-index: 35; top: 27px; left: 204px; color: #eaf4ef; }
   .main-area { width: 100%; margin-left: 0; }
   .topbar { gap: 12px; }
-  .topbar > .mobile-menu { margin-left: -5px; }
+  .topbar > .menu-toggle { margin-left: -5px; }
   .crumb { margin-right: auto; }
   .summary-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .summary-item:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }

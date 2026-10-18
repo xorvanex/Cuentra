@@ -267,3 +267,9 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 - La pantalla de facturas deshabilita el ingreso y explica que hace falta crear una política activa antes de registrar documentos. El formulario también impide procesar si no hay políticas.
 - Se añadió el control funcional de contraer/expandir el menú lateral en escritorio. Al contraerlo quedan visibles el logo y los iconos; navegación móvil mantiene su menú superpuesto.
 - Verificación: `pnpm typecheck` en `frontend` pasó (`tsc --noEmit`).
+
+## 2026-10-18 — Ajustes finales de menú y pruebas locales
+
+- Se reemplazaron los controles separados de menú por un único botón adaptable: contrae/expande la barra lateral en escritorio y abre/cierra la navegación en móvil.
+- Se simplificó el aviso del espacio de pruebas para comunicar únicamente que está habilitado al ejecutar Cuentra localmente, con una acción para volver al resumen.
+- Verificación: `pnpm typecheck` en `frontend` pasó (`tsc --noEmit`).
