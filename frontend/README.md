@@ -18,7 +18,7 @@ if (-not (Test-Path .env.local)) { Copy-Item .env.local.example .env.local }
 pnpm dev
 ```
 
-Abre <http://localhost:3000>. Para usar npm, ejecuta `npm install` y `npm run dev`. En desarrollo local el cliente usa `http://127.0.0.1:8000/api/v1`; `NEXT_PUBLIC_API_BASE_URL` permite cambiarlo. En Railway configura `NEXT_PUBLIC_API_BASE_URL=/api/v1` y `CUENTRA_API_ORIGIN=http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`. Next.js reenvía `/api/v1/*` al backend por la red privada; el navegador solo se comunica con el dominio del frontend. No publiques un dominio para `cuentra-api`.
+Abre <http://localhost:3000>. Para usar npm, ejecuta `npm install` y `npm run dev`. En desarrollo local el cliente usa `http://127.0.0.1:8000/api/v1`; `NEXT_PUBLIC_API_BASE_URL` permite cambiarlo. En Railway configura `NEXT_PUBLIC_API_BASE_URL=/api/v1` y `CUENTRA_API_ORIGIN=http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`. La ruta API de Next.js reenvía `/api/v1/*` al backend por la red privada en tiempo de ejecución; el navegador solo se comunica con el dominio del frontend. No publiques un dominio para `cuentra-api`.
 
 En otra terminal desde la raíz inicia el backend:
 

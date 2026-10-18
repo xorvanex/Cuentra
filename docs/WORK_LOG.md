@@ -246,6 +246,8 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 - Se montó `cuentra-api-volume` en `/app/backend/data` y se configuró `RAILWAY_RUN_UID=0` para permitir la escritura en el volumen montado por Railway.
 - El backend se construyó con Python 3.11 y Tesseract inglés/español; Railway confirmó que pasó `/api/v1/health`. La API sigue privada.
 - Se creó el servicio `cuentra-web`, conectado a la misma rama, con raíz `/frontend` y Dockerfile `/frontend/Dockerfile`.
-- Para evitar publicar una API sin autenticación, se añadió una reescritura de Next.js que manda `/api/v1/*` hacia `CUENTRA_API_ORIGIN`. Railway debe resolver ese origen mediante `${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`, y el cliente público debe apuntar a `/api/v1`.
+- Para evitar publicar una API sin autenticación, el frontend expone una ruta proxy de Next.js que manda `/api/v1/*` hacia `CUENTRA_API_ORIGIN` en tiempo de ejecución. Railway debe resolver ese origen mediante `${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`, y el cliente público debe apuntar a `/api/v1`.
 - Actualizados los README y documentos de arquitectura/seguridad para indicar los ajustes de Railway y el riesgo residual de una demo pública sin autenticación. Usar solo datos sintéticos.
-- Pendiente: commit/push de esta configuración; establecer las dos variables de `cuentra-web`; aplicar cambios Railway, desplegar frontend y generar su dominio público. No generar dominio público para `cuentra-api`.
+- Railway: dominio público del frontend `https://cuentra-web-production-a24b.up.railway.app`, con target port `8080`; backend sin dominio público.
+- Se detectó que la reescritura configurada no se estaba aplicando al despliegue y el cliente recibía 404. Se cambió a una route handler proxy para evaluar `CUENTRA_API_ORIGIN` en runtime; queda desplegar y comprobar `/api/v1/health`.
+- Pendiente: commit/push del proxy en runtime y comprobar la conexión frontend → backend privado. No generar dominio público para `cuentra-api`.
