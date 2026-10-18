@@ -1,4 +1,4 @@
-# Frontend — Blinka Guard
+# Frontend — Cuentra
 
 Interfaz modular Next.js + TypeScript conectada al backend FastAPI local. No usa base de datos propia ni rellena errores de conexión con datos ficticios.
 
@@ -37,7 +37,7 @@ Los binarios no se almacenan; el texto extraído sí se conserva para explicar p
 
 ## Espacio de pruebas y corpus
 
-El selector **Pruebas locales** dirige peticiones con `X-Blinka-Workspace: test` a `backend/data/test_state.json`. El botón de carga agrega fixtures sencillos; el reinicio pide confirmación. Para usar los 12 documentos de `synthetic-invoices/`, entra a Facturas dentro del mismo espacio y súbelos en lote; usa la política USD y sigue el orden de presupuesto en el README del corpus.
+El selector **Pruebas locales** dirige peticiones con `X-Cuentra-Workspace: test` a `backend/data/test_state.json`. El botón de carga agrega fixtures sencillos; el reinicio pide confirmación. Para usar los 12 documentos de `synthetic-invoices/`, entra a Facturas dentro del mismo espacio y súbelos en lote; usa la política USD y sigue el orden de presupuesto en el README del corpus.
 
 La UI muestra decisiones APPROVE/BLOCK/ESCALATE, aprobaciones pendientes, historial y explicación. Solo ESCALATE crea una aprobación. La resolución requiere actor y motivo; en esta demo el actor configurado es `demo-approver` y no representa autenticación real.
 

@@ -1,5 +1,13 @@
 # Registro de trabajo compartido
 
+## 2026-10-18 — Cambio de identidad a Cuentra
+
+- Se sustituyó la identidad visible del producto por **Cuentra** en la interfaz, metadatos, documentación y configuración versionada.
+- Se creó un símbolo de marca original en SVG, aplicado al menú lateral y al favicon.
+- Se renombraron los encabezados internos del espacio de trabajo (`X-Cuentra-Workspace`) y las variables de configuración de almacenamiento y pruebas locales.
+- Se mantuvo el identificador físico anterior del volumen Docker para conservar los registros locales existentes; su nombre lógico en Compose ahora es `cuentra-data`.
+- Se conservó el historial del proyecto y sus rutas de trabajo; la carpeta local y el repositorio Git mantienen por ahora sus nombres técnicos existentes.
+
 ## 2026-10-17 — README preparado para evaluación
 
 - Se reescribió el README principal como guía de entrada para evaluadores: resumen del reto, diagrama de flujo, inicio Docker en un comando, URLs, demo con facturas sintéticas, dependencias, OCR dentro del contenedor, persistencia, solución inicial de problemas y límites del prototipo.
@@ -36,9 +44,9 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 
 ### Contexto consultado
 
-- Se revisó `PLAN_MAESTRO_BLINKA_GUARD.md` y los documentos de arquitectura, modelo de datos y documentación del proyecto en `blinka-guard-starter`.
+- Se revisó el plan maestro y los documentos de arquitectura, modelo de datos y documentación del proyecto en la carpeta starter.
 - La guía propone un monolito modular, datos sintéticos, API, dominio, evaluación determinista, repositorios y persistencia local SQLite.
-- La carpeta destino `blinka-guard` estaba casi vacía: contenía únicamente `LICENSE`.
+- La carpeta destino del proyecto estaba casi vacía: contenía únicamente `LICENSE`.
 
 ### Cambios realizados
 
@@ -51,7 +59,7 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 
 ### Pendiente para continuar
 
-1. Confirmar el nombre visible del proyecto: los documentos fuente usan **Blinka Guard**, mientras que la conversación mencionó **LinkaWard**. El repositorio conserva el nombre de los documentos por ahora.
+1. Se confirmó **Cuentra** como identidad visible del producto. La ruta local y el slug remoto del repositorio conservan sus nombres técnicos actuales.
 2. Implementar entidades y tipos monetarios exactos (sin `float`) para factura, proveedor, política y decisión.
 3. Implementar evaluador determinista fail-closed con códigos de motivo e idempotencia.
 4. Añadir persistencia SQLite y registro de auditoría transaccional.
@@ -93,7 +101,7 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 
 ## 2026-10-17 — Entorno virtual en la raíz
 
-- Se creó `blinka-guard/.venv` y se reinstaló allí el backend editable con extras de desarrollo.
+- Se creó `.venv` en la raíz del repositorio y se reinstaló allí el backend editable con extras de desarrollo.
 - Se actualizaron ambos README con comandos desde la raíz y ejecución directa del Python del entorno, sin requerir activación.
 - Se confirmó desde la raíz: 2 pruebas aprobadas, Ruff limpio, aplicación importable y arranque real de Uvicorn; `GET /api/v1/health` respondió `{"status":"ok"}`.
 - Se eliminó el entorno virtual anidado `backend/.venv` para dejar una única ubicación de entorno en la raíz.
@@ -136,7 +144,7 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 - Persistencia JSON y lock solo coordinan una instancia de proceso local; no sirven para varias réplicas ni acceso concurrente entre procesos.
 - La lista de aprobadores no sustituye login, autenticación ni autorización real. Mantener la API local y usar datos ficticios.
 - El `period_budget` funciona como límite acumulado de aprobaciones para esa política; no hay ciclo automático de reinicio mensual.
-- Se confirmó que el nombre del producto es Blinka Guard; el export anterior contenía restos de LinkaWard, corregidos en el frontend integrado.
+- Se confirmó el nombre original del producto; el export anterior contenía restos de otra identidad, corregidos al integrar el frontend.
 
 ## 2026-10-17 — Verificación HTTP del flujo de aprobación
 
@@ -148,20 +156,20 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 
 ## 2026-10-17 — Revisión inicial de referencias del frontend
 
-- Se revisó el sitio público `https://blinka.co/`: presenta la plataforma y conceptos de cuentas, tarjetas, pagos y back office; el sitio público no expone el HTML de la aplicación autenticada. Su enlace de acceso dirige a `app.blinka.co`.
-- Se inventariaron los ZIP de `blinka-guard-starter/dashboards ejemplos`; están íntegros. Incluyen tres documentos `.fig`, un documento `.sketch` con vista previa y `frontend-de-blinkaguard.zip`.
+- Se revisó la web pública de referencia: presenta conceptos de cuentas, tarjetas, pagos y back office; la página pública no expone el HTML de la aplicación autenticada.
+- Se inventariaron los ZIP de la carpeta starter y sus ejemplos de dashboard; estaban íntegros e incluían documentos de diseño y un archivo de exportación del frontend.
 - Los archivos `.fig` son documentos de diseño de Figma, no proyectos HTML exportados. El archivo Sketch incluye páginas “Cover” y “Assets”; su vista previa puede servir como referencia visual.
 - El frontend exportado usa Next.js/React y contiene `lib/api.ts`, pero el componente principal no lo importa: facturas, aprobaciones y auditoría están en datos demo estáticos, y las acciones de aprobar/rechazar solo cambian estado local.
-- Quedan inconsistencias de marca en el export: README titulado LinkaWard, componente llamado `linkaward-dashboard`, avatar `LW` y contenido demo en EUR con empresas/usuarios ficticios. Debe corregirse e integrarse contra Blinka Guard antes de considerarlo funcional.
+- Quedaban inconsistencias de marca en el export: contenido heredado de otro nombre, un avatar de muestra y datos ficticios en EUR. Se corrigieron al integrar el frontend.
 - No se extrajeron archivos sobre la raíz del proyecto ni se modificó código del frontend; se inspeccionaron los ZIP sin alterar sus contenidos.
 
 ## 2026-10-17 — Frontend integrado con el backend
 
-- Se integró el export `frontend-de-blinkaguard.zip` como aplicación separada en `frontend/`, conservando Next.js, React y TypeScript. Se eliminaron el cliente de analytics, componentes del export no usados, mocks visuales y la opción que ignoraba errores TypeScript.
+- Se integró el export del frontend como aplicación separada en `frontend/`, conservando Next.js, React y TypeScript. Se eliminaron el cliente de analytics, componentes del export no usados, mocks visuales y la opción que ignoraba errores TypeScript.
 - Se separaron el shell/navegación, resumen, registro y detalle de facturas, cola/resolución de aprobaciones, auditoría, cliente HTTP tipado, carga de datos y formatos locales.
 - La UI consulta health, facturas, políticas, decisiones, aprobaciones (incluido el historial) y eventos de auditoría reales. Permite registrar facturas, evaluar con la política elegida y resolver escaladas con motivo. No sustituye errores de API por datos ficticios.
 - Se añadió CORS restringido a `localhost:3000` y `127.0.0.1:3000` para el frontend de desarrollo. El origen puede configurarse mediante `CORS_ORIGINS`.
-- Se normalizaron nombres/estados a Blinka Guard y se documentaron comandos para levantar ambas aplicaciones.
+- Se normalizaron nombres/estados a Cuentra y se documentaron comandos para levantar ambas aplicaciones.
 - Dependencias frontend instaladas con pnpm 11.25.0; se añadió `.env.local.example`, ignorado el entorno local y conservado el lockfile.
 
 ### Verificación
@@ -182,7 +190,7 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 
 ## 2026-10-17 — Alcance del producto y brechas frente al reto
 
-- Se revisó el plan maestro inicial en `blinka-guard-starter/PLAN_MAESTRO_BLINKA_GUARD.md` y se contrastó con las rutas/API, formularios, motor determinista, auditoría y persistencia actuales.
+- Se revisó el plan maestro inicial en la carpeta starter y se contrastó con las rutas/API, formularios, motor determinista, auditoría y persistencia actuales.
 - Se añadió `docs/PRODUCT_SCOPE.md` con el problema, alcance/exclusiones del reto, invariantes de seguridad, brechas observadas y backlog priorizado.
 - El alcance ahora contempla como siguiente iteración: zona local de pruebas aislada del JSON operativo, fixtures con 3 PDFs + 3 imágenes + 3 textos de correo + 3 textos de chat, confirmación humana de campos extraídos, configuración visible de políticas USD, detalle explicable de auditoría y evidencia de aceptación.
 - No se modificó ni reinició `backend/data/runtime_state.json`; no se implementaron todavía carga de documentos, OCR ni controles de reinicio. Esos trabajos quedan priorizados antes de la entrega.
@@ -190,7 +198,7 @@ Este archivo permite que otra persona o agente retome el trabajo sin repetir la 
 ## 2026-10-17 — Preparación de corpus Antigravity y avance del MVP
 
 - Se creó `docs/ANTIGRAVITY_ASSET_BRIEF.md` para producir 12 fuentes sintéticas (3 PDF, 3 imágenes, 3 EML/correo, 3 TXT/chat), con resultados esperados, nombres exactos, política USD, archivo independiente de política/acuerdos, criterios de privacidad y orden de evaluación de presupuesto.
-- Se implementó el selector de espacios operativo/pruebas. El header `X-Blinka-Workspace: test` dirige cada petición al JSON aislado `backend/data/test_state.json`; solo se expone en desarrollo local. La zona de pruebas carga idempotentemente 3 facturas y política USD, y reinicia con confirmación, registrando el reinicio en su propia auditoría.
+- Se implementó el selector de espacios operativo/pruebas. El header `X-Cuentra-Workspace: test` dirige cada petición al JSON aislado `backend/data/test_state.json`; solo se expone en desarrollo local. La zona de pruebas carga idempotentemente 3 facturas y política USD, y reinicia con confirmación, registrando el reinicio en su propia auditoría.
 - Se implementó `/documents/extract`: PDF con texto seleccionable, `.txt`, `.eml` y OCR local opcional de PNG/JPG. Limita archivos a 10 MB, no guarda binarios, presenta advertencias/campos faltantes y nunca aprueba desde la extracción. `pytesseract` quedó instalado como dependencia Python; el ejecutable Tesseract no está presente en esta máquina, por lo que el OCR real de imagen sigue pendiente de instalar/verificar.
 - Se añadieron `agreement_reference` y procedencia/texto de fuente a facturas. Los importes pactados viven en `Policy.vendor_terms`, controlada desde la vista Políticas; una discrepancia, referencia desconocida o referencia faltante para un proveedor con términos bloquea la evaluación. Así el documento entrante no puede afirmar su propio importe contractual.
 - Se agregó editor UI de políticas/términos, expansión de actividad para explicar decisiones y acceso al texto extraído, y la pantalla de pruebas aisladas.

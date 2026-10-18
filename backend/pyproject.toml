@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "blinka-guard-backend"
+name = "cuentra-backend"
 version = "0.1.0"
-description = "API del MVP Blinka Guard para evaluación segura de facturas sintéticas"
+description = "API del MVP Cuentra para evaluación segura de facturas sintéticas"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115,<1.0",

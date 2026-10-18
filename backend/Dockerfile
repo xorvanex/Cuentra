@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     TESSERACT_LANG=eng+spa \
-    BLINKA_DATA_FILE=/app/backend/data/runtime_state.json
+    CUENTRA_DATA_FILE=/app/backend/data/runtime_state.json
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng tesseract-ocr-spa \

@@ -1,4 +1,4 @@
-# Guía para agentes — Blinka Guard
+# Guía para agentes — Cuentra
 
 Antes de cambiar código, lee `docs/PRODUCT_SCOPE.md`, `docs/WORK_LOG.md` y la documentación pertinente de arquitectura o seguridad. Actualiza `docs/WORK_LOG.md` al finalizar con fecha, archivos tocados, decisiones, verificaciones ejecutadas y pendientes reales.
 

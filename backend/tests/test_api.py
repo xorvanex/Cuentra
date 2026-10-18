@@ -78,7 +78,7 @@ def test_root_returns_api_entrypoints() -> None:
 def test_local_test_workspace_loads_resets_and_never_changes_main_state() -> None:
     main_policy = create_policy()
     main_invoice = create_invoice("MAIN-KEPT-001")
-    test_headers = {"X-Blinka-Workspace": "test"}
+    test_headers = {"X-Cuentra-Workspace": "test"}
 
     assert client.get("/api/v1/invoices").json() == [main_invoice]
     assert client.get("/api/v1/invoices", headers=test_headers).json() == []

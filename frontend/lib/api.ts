@@ -108,7 +108,7 @@ async function request<T>(workspace: Workspace, path: string, init?: RequestInit
       ...init,
       headers: {
         Accept: "application/json",
-        ...(workspace === "test" ? { "X-Blinka-Workspace": "test" } : {}),
+        ...(workspace === "test" ? { "X-Cuentra-Workspace": "test" } : {}),
         ...(init?.body && !(init.body instanceof FormData) ? { "Content-Type": "application/json" } : {}),
         ...init?.headers,
       },

@@ -1,4 +1,4 @@
-# Blinka Guard
+# Cuentra
 
 <p align="center">
   <strong>Un agente local para revisar facturas con reglas claras y decisiones auditables.</strong>
@@ -11,7 +11,7 @@
   <img alt="Docker Compose" src="https://img.shields.io/badge/Run-Docker%20Compose-2496ED?logo=docker&logoColor=white">
 </p>
 
-Blinka Guard es un prototipo local para el reto de Hackatón 30X. Recibe facturas ficticias, extrae sus datos, los contrasta con las reglas de una empresa y decide si cada caso queda **aprobado para pago en la simulación**, **bloqueado** o **escalado a una persona**. Registra la explicación y el historial de cada decisión.
+Cuentra es un prototipo local para el reto de Hackatón 30X. Recibe facturas ficticias, extrae sus datos, los contrasta con las reglas de una empresa y decide si cada caso queda **aprobado para pago en la simulación**, **bloqueado** o **escalado a una persona**. Registra la explicación y el historial de cada decisión.
 
 > **Para quien evalúa:** la forma más sencilla de probarlo es iniciar Docker Desktop y ejecutar `docker compose up --build -d` desde la carpeta raíz. No hace falta instalar Python, Node.js, Tesseract ni dependencias del proyecto en el equipo anfitrión.
 
@@ -79,7 +79,7 @@ Detén la aplicación conservando el estado local:
 docker compose down
 ```
 
-El estado se guarda en el volumen de Compose `blinka-data` (Docker suele añadirle el prefijo del proyecto, por ejemplo `blinka-guard_blinka-data`), separado de los archivos locales ignorados por Git. **No ejecutes `docker compose down -v` salvo que quieras borrar permanentemente ese volumen y todos los datos guardados en él.**
+El estado se guarda en el volumen persistente de Compose `cuentra-data`, separado de los archivos locales ignorados por Git. El identificador físico existente se conserva para que el cambio de marca no desconecte los datos guardados. **No ejecutes `docker compose down -v` salvo que quieras borrar permanentemente ese volumen y todos los datos guardados en él.**
 
 ### Compartir la demo con otra persona
 
@@ -161,7 +161,7 @@ Si no tienes pnpm, usa npm: `npm install` y luego `npm run dev`. El cliente loca
 
 - `backend/data/runtime_state.json`: estado operativo en ejecución local sin Docker.
 - `backend/data/test_state.json`: estado aislado de **Pruebas locales** en ejecución local sin Docker.
-- Con Docker, ambos estados se guardan dentro del volumen `blinka-data`; no se incluyen en el repositorio.
+- Con Docker, ambos estados se guardan dentro del volumen `cuentra-data`; no se incluyen en el repositorio.
 - Los binarios cargados se procesan en memoria y no se guardan; el texto extraído y los datos necesarios para explicar la decisión sí quedan en el estado local.
 - El corpus de `synthetic-invoices/` es ficticio. Usa únicamente estos datos para la demostración.
 - `APPROVE` significa autorizado dentro de la simulación. La aplicación no mueve dinero ni crea pagos reales.

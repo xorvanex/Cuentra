@@ -30,11 +30,8 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 /* Navigation */
 .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 30; width: 248px; display: flex; flex-direction: column; padding: 25px 16px 18px; background: var(--nav); color: #eef5f2; }
 .brand-lockup { height: 39px; display: flex; align-items: center; gap: 10px; padding: 0 9px; }
-.brand-mark { position: relative; width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #c4eb68; border-radius: 8px 8px 8px 2px; transform: rotate(-9deg); }
-.brand-mark::before { content: ""; width: 9px; height: 9px; border: 2px solid var(--lime); border-radius: 50%; }
-.brand-mark span { position: absolute; right: 3px; top: 3px; width: 5px; height: 5px; border-radius: 50%; background: #54c9b1; }
-.brand-name { color: #fff; font-size: 18px; font-weight: 680; letter-spacing: -.055em; }
-.brand-name > span { color: var(--lime); margin-left: 4px; font-weight: 450; }
+.brand-mark { width: 30px; height: 30px; display: block; flex: 0 0 auto; }
+.brand-name { color: #fff; font-size: 19px; font-weight: 680; letter-spacing: -.045em; }
 .workspace-switcher { width: 100%; min-height: 58px; display: flex; align-items: center; gap: 10px; margin: 30px 0 34px; padding: 9px 10px; border: 1px solid #ffffff20; border-radius: 8px; color: inherit; background: #ffffff09; text-align: left; transition: border-color .15s, background .15s; }
 .workspace-switcher:hover { border-color: #ffffff40; background: #ffffff12; }
 .workspace-switcher:focus-visible, .crumb-home:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }

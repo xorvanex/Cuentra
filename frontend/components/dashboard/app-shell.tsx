@@ -60,13 +60,13 @@ export function AppShell({
       {menuOpen && <button className="mobile-scrim" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" />}
       <aside className={`sidebar ${menuOpen ? "sidebar-open" : ""}`}>
         <div className="brand-lockup">
-          <span className="brand-mark"><span /></span>
-          <span className="brand-name">blinka<span>guard</span></span>
+          <img className="brand-mark" src="/cuentra-mark.svg" alt="" />
+          <span className="brand-name">Cuentra</span>
         </div>
 
-        <button type="button" className="workspace-switcher" onClick={() => navigate("overview")} aria-label="Ir al resumen de Blinka Guard">
+        <button type="button" className="workspace-switcher" onClick={() => navigate("overview")} aria-label="Ir al resumen de Cuentra">
           <span className="workspace-symbol"><CheckCheck size={16} /></span>
-          <span><strong>Blinka Guard</strong><small>Control de operaciones</small></span>
+          <span><strong>Cuentra</strong><small>Control de operaciones</small></span>
           <ChevronRight size={15} />
         </button>
 
@@ -103,7 +103,7 @@ export function AppShell({
           </div>
         </header>
         <div className="page-container">{children}</div>
-        <footer className="page-footer"><span>Blinka Guard</span><span>Panel de control local · Hackathon 30X</span></footer>
+        <footer className="page-footer"><span>Cuentra</span><span>Panel de control local · Hackathon 30X</span></footer>
       </main>
     </div>
   );

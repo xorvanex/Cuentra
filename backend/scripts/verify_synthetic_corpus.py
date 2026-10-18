@@ -33,10 +33,10 @@ def main() -> int:
     order += [entry["id"] for entry in manifest if entry["id"] not in order]
     failures: list[str] = []
     passed = 0
-    headers = {"X-Blinka-Workspace": "test"}
+    headers = {"X-Cuentra-Workspace": "test"}
     original_test_path = local_json._test_store.path
 
-    with tempfile.TemporaryDirectory(prefix="blinka-corpus-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="cuentra-corpus-") as temporary:
         local_json._test_store.set_path_for_testing(Path(temporary) / "test-state.json")
         try:
             with TestClient(app) as client:

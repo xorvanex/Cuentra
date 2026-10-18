@@ -1,8 +1,8 @@
-# Paquete de Documentos Sintéticos — Blinka Guard
+# Paquete de Documentos Sintéticos — Cuentra
 
 > [!IMPORTANT]
 > **Aviso de confidencialidad y datos sintéticos:**
-> Todos los datos, entidades corporativas, nombres de fantasía, personas, importes, identificadores, direcciones de correo y números de orden contenidos en este paquete son **100% sintéticos y ficticios**. Han sido generados exclusivamente para pruebas de desarrollo, evaluación de reglas de negocio, extracción documental y demostraciones de Blinka Guard. No corresponden a ninguna persona, empresa o transacción real.
+> Todos los datos, entidades corporativas, nombres de fantasía, personas, importes, identificadores, direcciones de correo y números de orden contenidos en este paquete son **100% sintéticos y ficticios**. Han sido generados exclusivamente para pruebas de desarrollo, evaluación de reglas de negocio, extracción documental y demostraciones de Cuentra. No corresponden a ninguna persona, empresa o transacción real.
 
 ---
 

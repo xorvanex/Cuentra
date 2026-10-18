@@ -1,4 +1,4 @@
-# Backend — Blinka Guard
+# Backend — Cuentra
 
 API local en Python 3.11+ y FastAPI. Implementa CRUD de facturas y políticas, evaluación determinista, aprobación humana de casos escalados, extracción local de documentos y auditoría. No usa base de datos ni servicios externos: persiste en JSON local. Docker incluye Tesseract OCR con modelos inglés/español.
 
@@ -42,7 +42,7 @@ Las 12 fuentes están en `synthetic-invoices/`, junto con manifiesto, política 
 - `POST /api/v1/documents/extract`: extracción preliminar.
 - `/api/v1/local-test/*`: fixtures y reinicio del espacio aislado.
 
-Las rutas `/local-test` requieren entorno local y `X-Blinka-Workspace: test`; las acciones solo cambian `backend/data/test_state.json`.
+Las rutas `/local-test` requieren entorno local y `X-Cuentra-Workspace: test`; las acciones solo cambian `backend/data/test_state.json`.
 
 ## Reglas importantes
 

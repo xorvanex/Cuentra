@@ -1,4 +1,4 @@
-# Arquitectura — Blinka Guard MVP
+# Arquitectura — Cuentra MVP
 
 **Estado:** implementada localmente · **Fecha:** 2026-10-17
 

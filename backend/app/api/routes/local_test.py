@@ -17,7 +17,7 @@ TEST_STATE = DATA_DIR / "test_state.json"
 def _require_local_test_workspace(request: Request) -> None:
     client_host = request.client.host if request.client else ""
     if (
-        request.headers.get("X-Blinka-Workspace", "").lower() != "test"
+        request.headers.get("X-Cuentra-Workspace", "").lower() != "test"
         or settings.app_env not in {"development", "test"}
         or (
             client_host not in {"127.0.0.1", "::1", "testclient"}

@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blinka Guard | Control de facturas",
+  title: "Cuentra | Control de facturas",
   description:
-    "Revisión de facturas, evaluación de políticas y aprobaciones de Blinka Guard.",
+    "Revisión de facturas, evaluación de políticas y aprobaciones de Cuentra.",
 };
 
 export const viewport: Viewport = {

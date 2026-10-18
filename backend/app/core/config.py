@@ -5,11 +5,11 @@ from typing import ClassVar
 
 
 class Settings:
-    app_name: str = os.getenv("APP_NAME", "Blinka Guard API")
+    app_name: str = os.getenv("APP_NAME", "Cuentra API")
     app_env: str = os.getenv("APP_ENV", "development")
     api_prefix: str = os.getenv("API_PREFIX", "/api/v1")
     allow_local_test_non_loopback: bool = os.getenv(
-        "BLINKA_ALLOW_LOCAL_TEST_NON_LOOPBACK", "false"
+        "CUENTRA_ALLOW_LOCAL_TEST_NON_LOOPBACK", "false"
     ).lower() == "true"
     cors_origins: ClassVar[list[str]] = [
         origin.strip()

@@ -20,7 +20,7 @@ app.add_middleware(
     allow_origins=settings.cors_origins,
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["Accept", "Content-Type", "X-Blinka-Workspace"],
+    allow_headers=["Accept", "Content-Type", "X-Cuentra-Workspace"],
 )
 app.include_router(health_router, prefix=settings.api_prefix)
 app.include_router(approvals_router, prefix=settings.api_prefix)
@@ -34,7 +34,7 @@ app.include_router(policies_router, prefix=settings.api_prefix)
 @app.middleware("http")
 async def select_local_workspace(request: Request, call_next):
     """Rutea cada petición de demo al JSON local aislado de pruebas cuando se solicita."""
-    workspace = request.headers.get("X-Blinka-Workspace", "main").strip().lower()
+    workspace = request.headers.get("X-Cuentra-Workspace", "main").strip().lower()
     if workspace not in {"main", "test"}:
         return JSONResponse(status_code=400, content={"detail": "Espacio de trabajo inválido"})
     if workspace == "test":

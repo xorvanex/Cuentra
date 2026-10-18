@@ -1,4 +1,4 @@
-# Blinka Guard — alcance del producto y brechas
+# Cuentra — alcance del producto y brechas
 
 **Estado:** alcance acordado para el MVP de Hackatón 30X  
 **Fecha:** 17 de octubre de 2026
@@ -7,9 +7,9 @@
 
 Los equipos de finanzas reciben cuentas de cobro y facturas por distintos canales, revisan manualmente quién cobra, cuánto, en qué moneda y cuándo vence, comparan esos datos con las reglas internas y dejan constancia de la decisión. El proceso se repite y depende de la disponibilidad de una persona.
 
-Blinka Guard debe recibir una factura simulada, presentar sus datos extraídos para revisión, aplicar reglas deterministas de una empresa ficticia y recomendar una decisión: aprobar para pago, bloquear o escalar a una persona. Debe explicar cada resultado y guardar el historial para poder entender la decisión sin volver al documento de origen.
+Cuentra debe recibir una factura simulada, presentar sus datos extraídos para revisión, aplicar reglas deterministas de una empresa ficticia y recomendar una decisión: aprobar para pago, bloquear o escalar a una persona. Debe explicar cada resultado y guardar el historial para poder entender la decisión sin volver al documento de origen.
 
-La aprobación significa **autorizada para pago** en la simulación. Blinka Guard no crea ni ejecuta pagos.
+La aprobación significa **autorizada para pago** en la simulación. Cuentra no crea ni ejecuta pagos.
 
 ## Alcance del MVP
 
@@ -29,7 +29,7 @@ La aprobación significa **autorizada para pago** en la simulación. Blinka Guar
 - Verificar identidad/KYC, fraude o cumplimiento regulatorio.
 - Autenticación empresarial, roles productivos, multiempresa con aislamiento de seguridad o despliegue a producción.
 - Usar un LLM como autoridad para cambiar o saltarse las reglas. Si se incorpora asistencia de IA para extraer texto, sus resultados son sugerencias revisables; la decisión final permanece en el motor determinista.
-- Replicar el diseño interno de Blinka. La identidad y la interfaz de Blinka Guard son propias.
+- Replicar el diseño interno de la marca de referencia. Cuentra mantiene identidad e interfaz propias.
 
 ## Seguridad e invariantes de decisión
 

@@ -5,16 +5,16 @@ services:
       dockerfile: backend/Dockerfile
     environment:
       APP_ENV: development
-      APP_NAME: Blinka Guard API
+      APP_NAME: Cuentra API
       API_PREFIX: /api/v1
       CORS_ORIGINS: http://localhost:3000,http://127.0.0.1:3000
       TESSERACT_LANG: eng+spa
-      BLINKA_DATA_FILE: /app/backend/data/runtime_state.json
-      BLINKA_ALLOW_LOCAL_TEST_NON_LOOPBACK: "true"
+      CUENTRA_DATA_FILE: /app/backend/data/runtime_state.json
+      CUENTRA_ALLOW_LOCAL_TEST_NON_LOOPBACK: "true"
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
-      - blinka-data:/app/backend/data
+      - cuentra-data:/app/backend/data
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
       interval: 10s
@@ -34,4 +34,6 @@ services:
       - "127.0.0.1:3000:3000"
 
 volumes:
-  blinka-data:
+  cuentra-data:
+    # Keep the existing Docker data volume so renaming the product does not reset local records.
+    name: blinka-guard_blinka-data

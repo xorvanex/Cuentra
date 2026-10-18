@@ -18,7 +18,7 @@ from app.domain.models import ApprovalRequest, ApprovalStatus, AuditEvent, Decis
 class LocalJsonStore:
     def __init__(self, path: Path | None = None) -> None:
         default_path = Path(__file__).resolve().parents[2] / "data" / "runtime_state.json"
-        self.path = path or Path(os.getenv("BLINKA_DATA_FILE", default_path))
+        self.path = path or Path(os.getenv("CUENTRA_DATA_FILE", default_path))
         self._lock = RLock()
         self._transaction_depth = 0
         self._dirty = False
@@ -356,7 +356,7 @@ _default_store = LocalJsonStore()
 _test_store = LocalJsonStore(
     Path(__file__).resolve().parents[2] / "data" / "test_state.json"
 )
-_active_store: ContextVar[LocalJsonStore] = ContextVar("blinka_active_store", default=_default_store)
+_active_store: ContextVar[LocalJsonStore] = ContextVar("cuentra_active_store", default=_default_store)
 
 
 def select_store(workspace: str) -> tuple[LocalJsonStore, Token[LocalJsonStore] | None]:

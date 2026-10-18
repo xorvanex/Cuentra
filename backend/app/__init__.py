@@ -1,1 +1,1 @@
-"""Backend de Blinka Guard."""
+"""Backend de Cuentra."""
