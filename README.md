@@ -87,7 +87,9 @@ Comparte el repositorio o una copia de los archivos versionados, incluyendo `doc
 
 ## Despliegue de demo en Railway
 
-El proyecto puede desplegarse como dos servicios desde la rama `main`: `cuentra-api` con `/backend/Dockerfile` y el volumen en `/app/backend/data`, y `cuentra-web` con raíz `/frontend` y `/frontend/Dockerfile`. Configura en el servicio web `NEXT_PUBLIC_API_BASE_URL=/api/v1` y `CUENTRA_API_ORIGIN=http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8000`. La ruta API de Next.js reenvía las llamadas al host privado Railway; genera un dominio público solo para `cuentra-web` y mantén `cuentra-api` privado.
+El proyecto puede desplegarse como dos servicios desde la rama `main`: `cuentra-api` con `/backend/Dockerfile` y el volumen en `/app/backend/data`, y `cuentra-web` con raíz `/frontend` y `/frontend/Dockerfile`. Configura en el servicio web `NEXT_PUBLIC_API_BASE_URL=/api/v1` y `CUENTRA_API_ORIGIN=http://${{cuentra-api.RAILWAY_PRIVATE_DOMAIN}}:8080` (el backend escucha en el puerto asignado por Railway, actualmente `8080`). La ruta API de Next.js reenvía las llamadas al host privado Railway; genera un dominio público solo para `cuentra-web` y mantén `cuentra-api` privado.
+
+Demo publicada: [cuentra-web-production-a24b.up.railway.app](https://cuentra-web-production-a24b.up.railway.app/). La API responde a través del proxy privado en `/api/v1/health`; no publiques el servicio `cuentra-api`. Esta demo no tiene autenticación y debe usarse solo con datos sintéticos.
 
 Este despliegue es únicamente una demo pública con datos sintéticos: no hay autenticación y cualquier visitante puede operar los datos de demostración desde la interfaz. No cargues facturas ni datos reales. El almacenamiento JSON y las aprobaciones de demostración no son adecuados para producción.
 
