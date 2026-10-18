@@ -23,6 +23,12 @@ Este paquete contiene **12 artefactos fuente sintéticos** distribuidos en cuatr
   - Proveedor no autorizado (fuera de lista): `Selva Norte Consulting SAS`
   - Término de acuerdo preconfigurado: `Pacific Ledger Support LLC` + `NS-PO-902` por **USD 4,200.00**.
 
+## Agregar la política desde Cuentra
+
+Antes de subir estos archivos, abre **Políticas** en Cuentra y pulsa **Agregar política de prueba**. La app crea la política USD descrita en `company_policy_usd.json` (proveedores permitidos, máximo de USD 20,000, presupuesto de USD 15,000, umbral humano de USD 5,000 y acuerdo `NS-PO-902`) y luego abre **Facturas** con un aviso de que puedes cargar el corpus. Selecciona los PDF, PNG, correos `.eml` o chats `.txt` desde esta carpeta. Si la política ya está activa, usa **Subir facturas de prueba** para ir directamente a Facturas.
+
+La política se agrega al espacio de datos seleccionado. La sección **Pruebas locales** usa su propio archivo aislado y solo está disponible en ejecución local; para ejecutar este corpus en el demo publicado, agrega la política desde **Operativos**.
+
 ---
 
 ## 2. Matriz de los 12 artefactos sintéticos

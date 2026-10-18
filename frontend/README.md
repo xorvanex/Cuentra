@@ -43,6 +43,8 @@ Al entrar a **Pruebas locales** en `localhost`, la interfaz cambia automáticame
 
 El backend restringe ese espacio a desarrollo local (`APP_ENV=development|test` y loopback, salvo habilitación local explícita). En Railway, la sección muestra una explicación y un botón para regresar a Operativos; no intenta enviar peticiones de test que el backend rechazará con 403.
 
+Para recorrer el corpus `synthetic-invoices/` en **Operativos** (también en la demo publicada), abre **Políticas** y usa **Agregar política de prueba**. La app registra la política USD compatible con `synthetic-invoices/company_policy_usd.json`, muestra que los archivos ya están listos y abre Facturas. Las políticas activas también se pueden eliminar con confirmación; el backend las archiva y mantiene las decisiones previas para auditoría.
+
 La UI muestra decisiones APPROVE/BLOCK/ESCALATE, aprobaciones pendientes, historial y explicación. Solo ESCALATE crea una aprobación. La resolución requiere actor y motivo; en esta demo el actor configurado es `demo-approver` y no representa autenticación real.
 
 ## Estructura

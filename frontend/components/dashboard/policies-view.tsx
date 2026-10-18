@@ -1,23 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, Pencil, Plus, ShieldCheck, X } from "lucide-react";
+import { AlertCircle, ArrowRight, FilePlus2, Pencil, Plus, ShieldCheck, Trash2, X } from "lucide-react";
 import type { Policy, PolicyCreate } from "@/lib/api";
 import type { DashboardData } from "@/lib/use-dashboard-data";
 import { EmptyState, PanelHeading } from "@/components/ui/primitives";
 import { HelpTip } from "@/components/ui/help-tip";
+import { syntheticInvoicePolicy } from "@/lib/synthetic-policy";
 
 export function PoliciesView({
   data,
   busy,
   onSave,
+  onLoadSyntheticPolicy,
+  onDelete,
+  onNavigate,
 }: {
   data: DashboardData;
   busy: boolean;
   onSave: (payload: PolicyCreate, policyId?: string) => Promise<void>;
+  onLoadSyntheticPolicy: () => Promise<void>;
+  onDelete: (policyId: string) => Promise<void>;
+  onNavigate: (view: "invoices") => void;
 }) {
   const [selected, setSelected] = useState<Policy | "new" | null>(null);
   const [error, setError] = useState("");
+  const demoPolicyExists = data.policies.some((policy) => policy.name === syntheticInvoicePolicy.name && policy.currency === syntheticInvoicePolicy.currency);
+
+  async function addSyntheticPolicy() {
+    setError("");
+    try {
+      await onLoadSyntheticPolicy();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "No se pudo agregar la política de prueba.");
+    }
+  }
+
+  async function removePolicy(policy: Policy) {
+    const confirmed = window.confirm(`La política “${policy.name}” dejará de estar activa. Se conservarán las decisiones históricas y se cancelarán las aprobaciones pendientes asociadas. ¿Continuar?`);
+    if (!confirmed) return;
+    setError("");
+    try {
+      await onDelete(policy.id);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "No se pudo eliminar la política.");
+    }
+  }
 
   async function save(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,8 +77,11 @@ export function PoliciesView({
 
   return <>
     <section className="page-intro page-intro-compact">
-      <div><p className="eyebrow">Configuración / Reglas</p><h1>Políticas de pago <HelpTip label="Políticas de pago">Reglas que se aplican a cada factura: moneda, proveedores permitidos, acuerdos, máximo individual, presupuesto acumulado y umbral de aprobación humana.</HelpTip></h1><p>Define los límites que determinan cuándo aprobar, bloquear o escalar.</p></div>
-      <button type="button" className="button button-primary" onClick={() => { setError(""); setSelected("new"); }}><Plus size={15} />Nueva política</button>
+      <div><p className="eyebrow">Configuración / Reglas</p><h1>Políticas de pago <HelpTip label="Políticas de pago">Reglas que se aplican a cada factura: moneda, proveedores permitidos, acuerdos, máximo individual, presupuesto acumulado y umbral de aprobación humana.</HelpTip></h1><p>Define los límites que determinan cuándo aprobar, bloquear o escalar.</p><p className="policy-demo-hint">La política de prueba USD es compatible con los documentos de <code>synthetic-invoices/</code>.</p></div>
+      <div className="policy-header-actions">
+        {demoPolicyExists ? <button type="button" className="button button-secondary" onClick={() => onNavigate("invoices")}><ArrowRight size={15} />Subir facturas de prueba</button> : <button type="button" className="button button-secondary" disabled={busy} onClick={() => void addSyntheticPolicy()}><FilePlus2 size={15} />{busy ? "Agregando…" : "Agregar política de prueba"}</button>}
+        <button type="button" className="button button-primary" onClick={() => { setError(""); setSelected("new"); }}><Plus size={15} />Nueva política</button>
+      </div>
     </section>
 
     {selected && <form className="surface policy-form" onSubmit={(event) => void save(event)}>
@@ -70,15 +101,17 @@ export function PoliciesView({
       <div className="form-actions"><button type="button" className="button button-secondary" onClick={() => setSelected(null)}>Cancelar</button><button type="submit" className="button button-primary" disabled={busy}>{busy ? "Guardando…" : "Guardar política"}</button></div>
     </form>}
 
-    <section className="surface policy-list-surface">
+    {error && !selected && <p className="inline-error"><AlertCircle size={15} />{error}</p>}
+
+    {!selected && <section className="surface policy-list-surface">
       <PanelHeading title="Reglas disponibles" detail={`${data.policies.length} políticas activas`} />
       {data.policies.length === 0 ? <EmptyState title="Todavía no hay políticas" detail="Crea una política ficticia para poder evaluar facturas." /> : <div className="policy-list">
         {data.policies.map((policy) => <article className="policy-card" key={policy.id}>
           <div className="policy-card-main"><div className="policy-card-icon"><ShieldCheck size={17} /></div><div><h2>{policy.name}</h2><p>Versión {policy.version} · {policy.currency} · {policy.allowed_vendors.length} proveedores · {policy.vendor_terms.length} acuerdos</p></div></div>
           <div className="policy-limits"><span><small>Máximo / factura</small><strong>{policy.max_invoice_amount}</strong></span><span><small>Tope acumulado <HelpTip label="Tope acumulado">Suma de las facturas aprobadas por esta política en el estado guardado. El MVP no abre ni reinicia periodos calendario automáticamente.</HelpTip></small><strong>{policy.period_budget}</strong></span><span><small>Escalar desde</small><strong>{policy.human_approval_threshold}</strong></span></div>
-          <button type="button" className="button button-secondary policy-edit-button" onClick={() => { setError(""); setSelected(policy); }}><Pencil size={14} />Editar</button>
+          <div className="policy-card-actions"><button type="button" className="button button-secondary policy-edit-button" onClick={() => { setError(""); setSelected(policy); }}><Pencil size={14} />Editar</button><button type="button" className="button button-danger-secondary" disabled={busy} onClick={() => void removePolicy(policy)}><Trash2 size={14} />Eliminar</button></div>
         </article>)}
       </div>}
-    </section>
+    </section>}
   </>;
 }

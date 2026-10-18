@@ -291,6 +291,9 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 .extraction-review summary, .decision-box summary { cursor: pointer; font-weight: 600; }
 .extraction-review pre, .decision-box pre { max-height: 220px; overflow: auto; margin: 7px 0 0; padding: 9px; border-radius: 4px; color: #495b5f; background: #f3f6f4; font: 10px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; }
 .policy-form { margin-bottom: 16px; padding: 20px; }
+.policy-demo-hint { margin: 7px 0 0 !important; color: #738187; font-size: 10px !important; }
+.policy-demo-hint code { color: #44615d; font-size: 10px; }
+.policy-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
 .policy-vendors-field { grid-column: 1 / -1; }
 .policy-vendors-field small { margin-left: 6px; color: #839092; font-weight: 400; }
 .policy-vendors-field textarea { margin-top: 7px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); background: #fff; font: inherit; font-size: 11px; resize: vertical; }
@@ -308,6 +311,9 @@ button:disabled { cursor: not-allowed; opacity: .58; }
 .policy-limits small { color: #849194; font-size: 9px; }
 .policy-limits strong { margin-top: 5px; color: #283e45; font-size: 11px; font-weight: 600; }
 .policy-edit-button { min-height: 31px; }
+.policy-card-actions { display: flex; align-items: center; justify-content: flex-end; gap: 7px; flex-wrap: wrap; }
+.button-danger-secondary { min-height: 31px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; border: 1px solid #ead8d5; border-radius: 6px; color: #a3483f; background: #fff; font-size: 10px; }
+.button-danger-secondary:hover { border-color: #d9b7b2; background: #fff9f8; }
 .audit-event-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 4px 0; border: 0; color: inherit; background: transparent; text-align: left; font: inherit; }
 .audit-event-toggle:hover { color: var(--teal-dark); }
 .audit-detail-row > td { padding: 0 14px 14px; background: #f8faf8; }
@@ -382,7 +388,7 @@ button:disabled { cursor: not-allowed; opacity: .58; }
   .test-workspace-actions { align-items: flex-start; flex-direction: column; }
   .policy-card { grid-template-columns: 1fr auto; }
   .policy-limits { grid-column: 1 / -1; grid-row: 2; }
-  .policy-edit-button { grid-column: 2; grid-row: 1; }
+  .policy-card-actions { grid-column: 2; grid-row: 1; }
   .audit-detail-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
@@ -396,6 +402,12 @@ button:disabled { cursor: not-allowed; opacity: .58; }
   .test-workspace-step { grid-template-columns: 27px minmax(0, 1fr); }
   .test-workspace-step .button { grid-column: 2; justify-content: center; }
   .test-workspace-footer { align-items: flex-start; flex-direction: column; }
+  .policy-header-actions { width: 100%; justify-content: stretch; }
+  .policy-header-actions .button { flex: 1; }
+  .policy-card { grid-template-columns: 1fr; }
+  .policy-card-actions { grid-column: 1; grid-row: auto; justify-content: flex-start; }
+  .policy-card-actions .button { flex: 1; }
+  .policy-limits { grid-column: 1; grid-row: auto; }
   .workspace-select-label > span { display: none; }
   .workspace-select-label select { max-width: 86px; padding: 0 4px; font-size: 9px; }
   .api-label { font-size: 0; }

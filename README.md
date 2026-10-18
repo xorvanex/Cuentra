@@ -67,6 +67,8 @@ Abre la aplicación:
 
 En una ejecución local, entra a **Pruebas locales** y pulsa **Cargar y abrir facturas**. Cuentra selecciona automáticamente el espacio aislado, carga una política USD y tres facturas sintéticas, y abre Facturas. Desde allí puedes navegar a Aprobaciones y Registro de actividad sin cambiar el selector superior; el espacio queda marcado como **Pruebas**. Para usar el conjunto completo de 12 archivos, mantente en ese espacio y carga los documentos desde `synthetic-invoices/`; el [README del corpus](synthetic-invoices/README.md) describe los casos y el orden requerido para demostrar el límite de presupuesto.
 
+Para probar los 12 documentos del corpus desde **Operativos** o desde la demo publicada, abre **Políticas** y pulsa **Agregar política de prueba**. Cuentra crea la política USD compatible con `synthetic-invoices/company_policy_usd.json` y te lleva a Facturas con un aviso de que ya puedes subir los archivos. Selecciónalos desde `synthetic-invoices/` y procésalos. Las políticas se pueden quitar de las reglas activas con **Eliminar**; la acción pide confirmación, conserva las decisiones históricas y cancela aprobaciones pendientes asociadas.
+
 El espacio **Pruebas locales** está restringido a localhost por seguridad y no se puede cargar ni reiniciar desde Railway. En la demo publicada, esa sección explica la limitación y permite volver al espacio operativo con un clic. Para probar el recorrido aislado, ejecuta el proyecto con Docker y abre `http://localhost:3000`.
 
 Para ver la salida de los contenedores:

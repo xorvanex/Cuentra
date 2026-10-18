@@ -12,6 +12,7 @@ import { AuditView } from "@/components/audit/audit-view";
 import { TestWorkspaceView } from "@/components/dashboard/test-workspace-view";
 import { PoliciesView } from "@/components/dashboard/policies-view";
 import { ErrorNotice } from "@/components/ui/primitives";
+import { syntheticInvoicePolicy } from "@/lib/synthetic-policy";
 
 export function DashboardShell() {
   const [view, setView] = useState<ViewKey>("overview");
@@ -136,6 +137,40 @@ export function DashboardShell() {
     }
   }
 
+  async function addSyntheticInvoicePolicy() {
+    setBusyId("policy");
+    setNotice(null);
+    try {
+      const existing = data.policies.find((policy) => policy.name === syntheticInvoicePolicy.name && policy.currency === syntheticInvoicePolicy.currency);
+      if (!existing) await client.policies.create(syntheticInvoicePolicy);
+      await refresh();
+      setView("invoices");
+      setNotice({ kind: "success", message: existing ? "La política de prueba ya está activa. Puedes cargar las facturas de synthetic-invoices." : "Política de prueba USD agregada. Ya puedes cargar las facturas de synthetic-invoices." });
+    } catch (caught) {
+      const message = caught instanceof Error ? caught.message : "No se pudo agregar la política de prueba.";
+      setNotice({ kind: "error", message });
+      throw caught;
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  async function deletePolicy(policyId: string) {
+    setBusyId("policy");
+    setNotice(null);
+    try {
+      await client.policies.delete(policyId);
+      await refresh();
+      setNotice({ kind: "success", message: "Política eliminada de las reglas activas. El historial de decisiones se conserva." });
+    } catch (caught) {
+      const message = caught instanceof Error ? caught.message : "No se pudo eliminar la política.";
+      setNotice({ kind: "error", message });
+      throw caught;
+    } finally {
+      setBusyId(null);
+    }
+  }
+
   return <AppShell view={view} onNavigate={navigate} workspace={workspace} testWorkspaceAvailable={localTestAvailable} onWorkspaceChange={changeWorkspace} pendingCount={data.approvals.length} connected={data.connected} refreshing={refreshing} onRefresh={refresh}>
     {error && <ErrorNotice message={error} onRetry={refresh} />}
     {notice && <div className={`toast toast-${notice.kind}`} role="status"><span>{notice.kind === "success" ? <Check size={16} /> : <AlertTriangle size={16} />}{notice.message}</span><button className="icon-button" onClick={() => setNotice(null)} aria-label="Cerrar aviso"><X size={16} /></button></div>}
@@ -144,7 +179,7 @@ export function DashboardShell() {
       {view === "invoices" && <InvoicesView data={data} busyId={busyId} onCreate={createInvoice} onEvaluate={evaluateInvoice} onExtract={(file, channel) => client.documents.extract(file, channel)} />}
       {view === "approvals" && <ApprovalsView data={data} busyId={busyId} onResolve={resolveApproval} />}
       {view === "audit" && <AuditView data={data} />}
-      {view === "policies" && <PoliciesView data={data} busy={busyId === "policy"} onSave={savePolicy} />}
+      {view === "policies" && <PoliciesView data={data} busy={busyId === "policy"} onSave={savePolicy} onLoadSyntheticPolicy={addSyntheticInvoicePolicy} onDelete={deletePolicy} onNavigate={navigate} />}
       {view === "test" && <TestWorkspaceView data={data} localOnly={localTestAvailable} busy={busyId === "local-test"} onLoad={loadLocalTestData} onReset={resetLocalTestData} onNavigate={navigate} onReturnToDemo={() => changeWorkspace("main")} />}
     </>}
   </AppShell>;

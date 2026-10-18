@@ -168,6 +168,7 @@ export function createApi(workspace: Workspace = "main") {
     list: () => request<Policy[]>(workspace, "/policies"),
     create: (payload: PolicyCreate) => request<Policy>(workspace, "/policies", { method: "POST", body: JSON.stringify(payload) }),
     update: (policyId: string, payload: PolicyCreate) => request<Policy>(workspace, `/policies/${policyId}`, { method: "PUT", body: JSON.stringify(payload) }),
+    delete: (policyId: string) => request<void>(workspace, `/policies/${policyId}`, { method: "DELETE" }),
   },
   approvals: {
     list: () => request<Approval[]>(workspace, "/approvals?pending_only=false"),
